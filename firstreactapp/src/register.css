@@ -1,0 +1,108 @@
+
+    /* .gradient-custom-3 {
+        
+        background: #84fab0;
+        
+       
+        background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+        
+       
+        background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+        }
+        .gradient-custom-4 {
+       
+        background: #84fab0;
+   
+        background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+        
+       
+        background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+        }
+     */
+
+
+     /* Add your custom styling here */
+/* register.css */
+
+/* .container {
+    padding: 8%;
+  }
+  
+  .registration-form {
+    margin: -80px 0 0 0;
+    border-radius: 5px;
+    background: white;
+  }
+  
+  .header-background {
+    background: grey;
+    margin-top: -30px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  .text-uppercase {
+    color: white;
+  }
+  
+  .registration-form-container {
+   
+    padding: 10%;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  
+  .role-radio {
+    margin: -15px 0 0 0;
+  }
+  
+  .d-flex-justify {
+    margin: -15px 0 0 0;
+  }
+  
+  .btn-register {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+  }
+  
+  .link-text {
+    font-weight: bold;
+  }
+  
+  .registration-container {
+    margin-top: 20px;
+    max-width: 600px; /* Adjust the maximum width as needed */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* padding: 20px; */
+  /* } */
+   
+  /* @media (max-width: 768px) {
+    .registration-container {
+      margin-top: 40px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .form-label{
+        max-width: 100%;
+      }
+      .text-uppercase {
+        color: white;
+        max-width: 100%;
+      }
+  }
+   */
+
+   .text-uppercase {
+    color: chocolate;
+    margin-top: 40px; /* Increase the margin-top value as needed */
+  }
+  @media (max-width:1160px) {
+    .container{
+        margin-top: 40px;
+    }
+  }
