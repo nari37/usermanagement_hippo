@@ -21,16 +21,10 @@ export default function Update() {
     const [data, setData] = useState({ firstname: '', email: '', password: '', roletype: '' });
     const [tutorname, setName] = useState([]);
 //    ......................
-const [tutordata, settutorData] = useState({ id: '' });
+const [tutordata, settutorData] = useState('');
+const [tutorid,setTouid] = useState('');
 
-
-//     // get id's..
-//   const [studentId,setStudentId] = useState('');
-//   const [tutoreId,setTutorId] = useState('');
-// //   ....
-//   console.log(tutoreId)
-//   console.log(studentId)
-
+     
     const handler = (e) => {
 
         const { name, value } = e.target;
@@ -72,34 +66,36 @@ const [tutordata, settutorData] = useState({ id: '' });
     }, [id])
 
     
-   const [tutorid,setTouid] = useState('')
+  
 
-     const handlertutor = (e)=>{
+    const handlertutor = (e) => {
         const { name, value } = e.target;
-        setData((prevState) =>
-            ({ ...prevState, [name]: value }));
-
-
+        setData((prevState) => ({ ...prevState, [name]: value }));
+      
         const selectedId = e.target.options[e.target.selectedIndex].getAttribute('data-id');
         console.log('Selected ID:', selectedId);
-        setTouid(selectedId)
-         //  post tutor ids...
-        //  axios.post(`http://localhost:5000/alltutorids/${selectedId}`)
-       settutorData((prevData) => ({ ...prevData, id: selectedId }));
-        
-     };
+      
+        // Update the tutorid state
+        setTouid({ selectedId });
+      
+      };
+      
 
 
-    const update = (id) => {
+    const update = (id,tutorid) => {
         const userdetails = { firstname: data.firstname, email: data.email, password: data.password,course: data.course,content: data.content,actual:data.actual,total: data.total,discount:data.discount,paid: data.paid,remaining: data.remaining,start:data.start,end:data.end,project:data.project, roletype: data.roletype, assigned_to: data.assigned_to, status: data.status, fee_detail: data.fee_detail}
+
         axios.post(`http://localhost:5000/updateuser/${id}`, userdetails)
         .then((res) => {
             console.log(res.data);
             if (res !== '') {
                 alert('details  updated successfully!!!!');
                 console.log({ id });
-                // post students ids...
-               axios.post(`http://localhost:5000/allstudentids/${id}/${tutorid}`)
+                console.log({tutorid});
+        axios.post(`http://localhost:5000/assign-student-tutor/${id}/${tutorid}`) 
+        
+
+               
                 Nav('/stu')
                 
                 data.firstname = '';
@@ -119,6 +115,8 @@ const [tutordata, settutorData] = useState({ id: '' });
 
     }
 
+    
+
     useEffect(() => {
         axios.get(`http://localhost:5000/role/${roletype}`)
         .then((res) => {
@@ -127,15 +125,6 @@ const [tutordata, settutorData] = useState({ id: '' });
         })
     }, [roletype])
 
-// // ......get ids..
-//     useEffect(()=>{
-//         axios.get('http://localhost:5000/studen')
-//         .then(res=>setStudentId(res.data[0].id))
-//     },[])
-
-//     useEffect(()=>{
-       
-//     },[])
 
     return (
         <section>
@@ -286,7 +275,7 @@ const [tutordata, settutorData] = useState({ id: '' });
                                         <div>
                                             <div className="d-flex justify-content-center">
                                                 <button type="button"
-                                                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-body" onClick={()=>update(id)} style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 'bold',margin:'-30px 0 0 0' }}>Update</button>
+                                                    className="btn btn-success btn-block btn-lg gradient-custom-4 text-body" onClick={()=>update(id,tutorid.selectedId)} style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 'bold',margin:'-30px 0 0 0' }}>Update</button>
                                             </div>
 
 

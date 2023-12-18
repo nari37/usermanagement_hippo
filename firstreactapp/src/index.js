@@ -43,6 +43,8 @@ root.render(
     <Route path='/register' element={<Register/>}></Route>
     <Route path='/login' element={<Login/>}></Route>
     <Route path='/user/update/:id/:roletype' element={<Update/>}></Route>
+    
+
     <Route path='/user/tutorupdate/:id/:roletype' element={<TutorUpdate/>}></Route>
     <Route path='/tut' element={<TutorData/>}></Route>
     <Route path='/stu' element={<StudentData/>}></Route>

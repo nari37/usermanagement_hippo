@@ -3,10 +3,12 @@ const app = express();
 const server = require('http').createServer(app);
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
-const cors= require('cors');
+const cors = require('cors');
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const connection = mysql.createConnection(
     {
@@ -28,14 +30,6 @@ connection.connect((err) => {
 )
 
 
-
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
 
 
 //   Registration Page post api
@@ -710,20 +704,20 @@ app.post('/delstu/:id', (req, res) => {
 
 // get particular student list..
 // Get students assigned to a particular tutor..
-app.post('/tutoridpost/:id',(req,res)=>{
-    const id = req.params.id;
+// app.post('/tutoridpost/:id',(req,res)=>{
+//     const id = req.params.id;
    
-    console.log(id)
+//     console.log(id)
     
-    const sql = "INSERT INTO student_tutor_assignment (`tutor_id`) VALUES (?)"
-    connection.query(sql,[id],(err,insertIds)=>{
-        if(err){
-            res.json(err)
-        }else{
-            res.send(insertIds)
-        }
-    })
-})
+//     const sql = "INSERT INTO student_tutor_assignment (`tutor_id`) VALUES (?)"
+//     connection.query(sql,[id],(err,insertIds)=>{
+//         if(err){
+//             res.json(err)
+//         }else{
+//             res.send(insertIds)
+//         }
+//     })
+// })
 
 // app.post('/studentslists/:id',(req,res)=>{
 //     const id = req.params.id;
@@ -742,10 +736,10 @@ app.post('/tutoridpost/:id',(req,res)=>{
 
 
 // post student_tutor_assigntabele, when 'Admin' update happens post all student ids...
-// app.post('/allstudentids/:id',(req,res)=>{
+// app.post('/assign-student-tutor/:id',(req,res)=>{
 //     const id = req.params.id;
-//     console.log('student',id)
-//     const sql = "INSERT INTO `student_tutor_assignment` (`student_id`) VALUES (?)"
+//     console.log('student.....',id)
+//     const sql = "INSERT INTO `assigntable` (`studentid`) VALUES (?)"
 //     connection.query(sql,[id],(err,insertIds)=>{
 //         if(err){
 //             res.json(err)
@@ -757,40 +751,65 @@ app.post('/tutoridpost/:id',(req,res)=>{
 
 // })
 
-// // post student_tutor_assigntabele, when 'Admin' update happens post all tutor ids...
+// post student_tutor_assigntabele, when 'Admin' update happens post all tutor ids...
+// app.post('/assign-student-tutor', (req, res) => {
+//     const { selectedId } = req.body;
+//     console.log('tutorid....', selectedId);
+  
+//     // Rest of your code handling the selectedId
+  
+//     res.send('Received selected ID successfully');
+//   });
+  
+  
+// ....post two ids...
+app.post('/assign-student-tutor/:id/:tutorid', (req, res) => {
+   
+    const { id, tutorid } = req.params; // Use a single destructuring statement
+  console.log(id);
+  console.log(tutorid);
 
-// app.post('/alltutorids/:id',(req,res)=>{
-//     const id = req.params.id;
-//     console.log('tutorid',id)
-//     const sql = "INSERT INTO `student_tutor_assignment` (`tutor_id`) VALUES (?)"
-//     connection.query(sql,[id],(err,insertIds)=>{
-//         if(err){
-//             res.json(err)
-//         }else{
-//             res.send(insertIds)
-//         }
-//     })
 
-// })
-// post at a time...trail
-app.post('/allstudentids/:studentId/:tutorId', (req, res) => {
-    const { studentId, tutorId } = req.params;
-    const sql = "INSERT INTO `student_tutor_assignment` (`student_id`, `tutor_id`) VALUES (?, ?) ON DUPLICATE KEY UPDATE tutor_id = VALUES(tutor_id)";
-    connection.query(sql, [studentId, tutorId], (err, insertIds) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.send(insertIds);
-        }
+    const checkAssignmentSql = 'SELECT * FROM student_tutor_assignment WHERE `student_id` = ?';
+    
+    connection.query(checkAssignmentSql, [id], (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+  
+      if (results.length === 0) {
+        // If the student is not assigned, insert a new assignment
+        const insertSql = 'INSERT INTO student_tutor_assignment (`student_id`, `tutor_id`) VALUES (?, ?)';
+        connection.query(insertSql, [id, tutorid], (insertErr) => {
+          if (insertErr) {
+            console.error(insertErr);
+            return res.status(500).json({ error: 'Internal Server Error' });
+          }
+  
+          res.status(201).json({ message: 'Student assigned to tutor successfully' });
+        });
+      } else {
+        // If the student is already assigned, update the tutor assignment
+        const updateSql = 'UPDATE student_tutor_assignment SET `tutor_id` = ? WHERE `student_id` = ?';
+        connection.query(updateSql, [tutorid, id], (updateErr) => {
+          if (updateErr) {
+            console.error(updateErr);
+            return res.status(500).json({ error: 'Internal Server Error' });
+          }
+  
+          res.status(200).json({ message: 'Student reassigned to a new tutor successfully' });
+        });
+      }
     });
-});
-
+  });
+  
 
 //   qurey when tutor click the show studentlist btn...Api
 
 app.get('/studentslists/:id', (req, res) => {
     const id = req.params.id;
-    console.log('tutor_id',id);
+    // console.log('tutor_id',id);
     const sql = "SELECT student.id,student.firstname FROM student JOIN  student_tutor_assignment ON student.id = student_tutor_assignment.student_id WHERE student_tutor_assignment.tutor_id = ?";
     console.log("Students:",sql);
     connection.query(sql, [id], (err, students) => {

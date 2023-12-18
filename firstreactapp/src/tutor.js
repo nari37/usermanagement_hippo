@@ -188,7 +188,7 @@ export default function Tutor(){
    const [getstudentlist,Setgetstudentlist] = useState([])
      
     useEffect(() => {
-        
+
         axios.get(`http://localhost:5000/tutor/${id}/${course}`).then((res) => {
             setTutor(res.data);
     
@@ -270,9 +270,9 @@ const getstudentlists = (id)=>{
                     </thead>
                     <tbody align="center" style={{color:'black',background: 'rgba(255, 255, 255,0.2)',fontSize:'20px',fontFamily:'bahnschrift condensed'}}>
                        
-                        {tutorinfo.map((item) =>
+                        {tutorinfo && tutorinfo.map((item,id) =>
                             <>
-                              <tr >
+                              <tr key={id} >
                                     <th scope="row">{item.id}</th>
                                     <td>{item.firstname}</td>
                                     {/* <td>{item.lastname}</td> */}
