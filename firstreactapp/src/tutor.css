@@ -80,3 +80,73 @@
 th{
   font-size: 20px;
 }
+
+
+/* Add your existing styles here */
+
+/* General table styles */
+.table {
+  max-width: 100%;
+  margin-bottom: 1rem;
+  color: #fff;
+  padding: 2rem;
+}
+
+.table thead th {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #000;
+}
+
+.table tbody td {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Task details table */
+#taskdetails {
+  width: 100%;
+  margin: 0 0 0 120px;
+  border-radius: 5px;
+  display: none;
+}
+
+#taskdetails thead th,
+#taskdetails tbody td {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  #taskdetails {
+    margin-left: 0;
+  }
+}
+
+/* Additional styles for the "Show list of Students" button */
+.btn-primary {
+  margin-top: 10px;
+}
+
+/* Styles for the additional table */
+.studentlist table {
+  margin-top: 90px;
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+}
+
+table, td {
+  border: 1px solid #ddd;
+}
+table, th{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ... Your existing styles */

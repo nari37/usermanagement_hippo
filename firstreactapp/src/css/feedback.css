@@ -1,0 +1,142 @@
+  
+  .feedbackfrom{
+    max-width: 500px;
+    margin: 10px auto;
+    background-color:rgb(86, 146, 180);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 100;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: 1px solid #333;
+    background-color: rgb(42, 166, 42);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  /* Add these styles to your existing CSS file or create a new one */
+
+.student-dashboard {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+    text-align: center;
+}
+
+.progress-container {
+    margin-top: 20px;
+}
+
+.progress {
+    height: 20px;
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease-in-out;
+}
+
+.tasks-container {
+    margin-top: 20px;
+}
+
+.tasks-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tasks-container li {
+    margin-bottom: 10px;
+}
+
+.links-container {
+    margin-top: 20px;
+}
+
+.links-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.links-container li {
+    margin-bottom: 10px;
+}
+
+.student-table {
+    margin-top: 20px;
+}
+
+.feedbackfrom {
+    margin-top: 20px;
+}
+
+.feedbackfrom label {
+    margin-bottom: 5px;
+}
+
+.feedbackfrom textarea,
+.feedbackfrom input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.feedbackfrom button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.feedbackfrom button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .student-dashboard {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .tasks-container button {
+        width: 100%;
+    }
+}

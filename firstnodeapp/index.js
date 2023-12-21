@@ -4,6 +4,8 @@ const server = require('http').createServer(app);
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const multer = require('multer');
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -766,8 +768,8 @@ app.post('/delstu/:id', (req, res) => {
 app.post('/assign-student-tutor/:id/:tutorid', (req, res) => {
    
     const { id, tutorid } = req.params; // Use a single destructuring statement
-  console.log(id);
-  console.log(tutorid);
+     console.log(id);
+    console.log(tutorid);
 
 
     const checkAssignmentSql = 'SELECT * FROM student_tutor_assignment WHERE `student_id` = ?';
@@ -821,6 +823,46 @@ app.get('/studentslists/:id', (req, res) => {
         }
     });
 });
+
+
+// send(post) time and taskfile to assigntable....
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        // Corrected typo: 'cb' instead of 'cd'
+        return cb(null, "./public/files");
+    },
+    filename: function(req, file, cb) {
+        return cb(null, `${Date.now()}_${file.originalname}`);
+    }
+});
+
+const upload = multer({ storage });
+
+app.post('/taskpost/:id', upload.single('file'), (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+    console.log(req.file);
+
+    const tutorid = req.params.id;
+    const { time } = req.body;
+    const file = req.file; // No need to destructure req.file here
+
+    const sql = 'UPDATE student_tutor_assignment SET Time = ?, Test = ? WHERE tutor_id = ?';
+
+    connection.query(sql, [time, file.filename, tutorid], (err, result) => {
+        if (err) {
+            res.status(500).send('Internal server error');
+            console.log(err);
+        } else {
+            console.log('Task inserted successfully');
+            res.status(200).send('Task inserted successfully');
+        }
+    });
+});
+
+// get the students taskfiles 
+app.get('get')
+
 
 const registeredEmails = new Set();
 // Endpoint to check if an email exists..

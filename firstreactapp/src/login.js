@@ -377,15 +377,25 @@ export default function Login() {
         axios.post('http://localhost:5000/login', userdetails)
             .then((res) => {
                 handleLoginSuccess(res);
+                localStorage.setItem('username', res.data[0].firstname);
+                 console.log('loginres', res.data[0].firstname)
+                localStorage.setItem('roletype', res.data[0].roletype);
             })
             .catch((err) => {
                 console.error('Login Error:', err);
                 alert('Login failed');
             });
+            
+          
 
         axios.post('http://localhost:5000/tutorlogin', userdetails)
             .then((res) => {
-                handleLoginSuccess(res);
+                handleLoginSuccess(res)
+
+                console.log('loginres', res.data[0].firstname);
+
+                localStorage.setItem('username', res.data[0].firstname);
+                localStorage.setItem('roletype', res.data[0].roletype);
             })
             .catch((err) => {
                 console.error('Tutor Login Error:', err);
@@ -394,7 +404,13 @@ export default function Login() {
 
         axios.post('http://localhost:5000/studentlogin', userdetails)
             .then((res) => {
-                handleLoginSuccess(res);
+                handleLoginSuccess(res)
+                console.log('loginres', res.data[0].firstname);
+
+                  localStorage.setItem('username', res.data[0].firstname);
+                  localStorage.setItem('roletype', res.data[0].roletype);
+                  localStorage.setItem('id', res.data[0].id);
+                
             })
             .catch((err) => {
                 console.error('Student Login Error:', err);

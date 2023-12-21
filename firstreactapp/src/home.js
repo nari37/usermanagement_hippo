@@ -2,15 +2,35 @@ import { Link, useNavigate } from "react-router-dom";
 import './home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import Tutor from "./tutor.js";
+import Users from "./users.js";
+import Student from "./student.js";
+
+
 
 export default function Menu() {
     
-    const Nav = useNavigate();
+    const navigate = useNavigate();
     const logout = () => {
         localStorage.clear();
-        Nav('/login');
+        navigate('/login');
     }
-    
+    const UserProfile = ()=>{
+        const userRole = localStorage.getItem('roletype');
+        switch (userRole) {
+            case 'Tutor':
+                navigate('/tutor/:id/:course');
+                break;
+            case 'Admin':
+                navigate('/users');
+                break;
+            case 'Student':
+                navigate('/student/:id');
+                break;
+            default:
+                console.log('User role not recognized.');
+        }
+    }
 
 
     return (
@@ -77,7 +97,12 @@ export default function Menu() {
                 <ul>
                     {/* Home Page */}
                     <li><Link to='/'><i class="bi bi-house-fill"></i>Home</Link></li>
-
+                     {/* Profile Page */}
+                     <li>
+                    <Link to={UserProfile}>
+                            <i className="bi bi-person-fill"></i>Profile
+                        </Link>
+                     </li>
                     {/* Contact Page */}
                     <li><Link to='/first' ><i class="bi bi-person-lines-fill"></i>Contact</Link></li>
 
@@ -86,7 +111,7 @@ export default function Menu() {
 
                     {/* Users Page */}
                     {localStorage.getItem('roletype') === 'Admin' ? <li><Link to='/users' ><i class="bi bi-people-fill"></i>Users</Link></li> : ''}
-
+                     
                     
                     {/* Login Page */}
                     {localStorage.getItem('username') == null ? <li><Link to='/login' ><i class="bi bi-door-open-fill"></i>Login</Link></li> : ''}

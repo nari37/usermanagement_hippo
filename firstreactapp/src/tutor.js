@@ -178,6 +178,8 @@ import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useParams, Link} from "react-router-dom";
+import '../src/tutor.css';
+
 
 export default function Tutor(){
     
@@ -185,7 +187,9 @@ export default function Tutor(){
     const [courseinfo,setCourse] = useState([])
     const {id} = useParams();
     const {course} = useParams();
-   const [getstudentlist,Setgetstudentlist] = useState([])
+    const [getstudentlist,setgetstudentlist] = useState([]);
+    const [file,setFile] = useState(null);
+    const [selectedTime,setselectedTime] = useState('');
      
     useEffect(() => {
 
@@ -221,9 +225,28 @@ export default function Tutor(){
         }
        }
 
-
+// send(post) time and taskfile to assigntable..
+       const Timeonchange = (e)=>{
+          const selectedTime = e.target.value;
+          setselectedTime(selectedTime)
+          console.log("selected Time:",selectedTime);
+       } 
+         
+       const handleFileChange = (e)=>{
+         const selectedFile = e.target.files[0];
+         setFile(selectedFile)
+         console.log("selected file:",selectedFile);
+       }
+       
+       const sendtask = (id) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('time', selectedTime);
       
-
+        axios.post(`http://localhost:5000/taskpost/${id}`, formData)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      };
 
 
 
@@ -231,10 +254,10 @@ export default function Tutor(){
 
 const getstudentlists = (id)=>{
     axios.get(`http://localhost:5000/studentslists/${id}`)
-    .then(res =>console.log(res.data))
-       
+    .then(res =>setgetstudentlist(res.data))   
     .catch(err =>console.log(err))
 }
+
 
     
 
@@ -283,7 +306,7 @@ const getstudentlists = (id)=>{
                                     <td>{item.start_time}</td>
                                     <td>{item.end_time}</td>
                                     <td>
-                                        <button  name="activetask" className="btn btn-outline-primary" onClick={task}  >Task</button>
+                                        <button  name="activetask" className="btn btn-outline-primary" onClick={task}>Task</button>
                                     </td>
                                     {/* <td>{item.phone_number}</td> */}
                                     {/* <td>{studentinfo.filter(item=> val===item.id)}</td> */}
@@ -297,19 +320,19 @@ const getstudentlists = (id)=>{
                     </tbody>
 
                    </table>
-
+                 
                    <table id="taskdetails" className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)',borderRadius:'5px',display:'none',width:'775px',margin:'0 0 0 120px'}} >
                     <thead>
-                        <tr align="center" >
+                        <tr >
                             
                            
                             
-                            <th scope="col">Content</th>
-                           
-                            <th scope="col">date</th>
-                            <th scope="col">Task Status</th>
-                            <th scope="col">Test</th>
-                            <th scope="col">Action</th>
+                            <th>Content</th>
+                            <th>date</th>
+                            <th>Time</th>
+                            <th>Task Status</th>
+                            <th>Test</th>
+                            <th>Action</th>
                             
                             
                         </tr>
@@ -318,42 +341,69 @@ const getstudentlists = (id)=>{
                     
                         {courseinfo.map((item) =>
                             <>
-                              <tr  >
-                                    
-                                   
-                                    
+                              <tr  >              
                                     <td >
                                     {item.content}
-                                    </td>
-                                    
-                                    
-                                    
+                                    </td>    
                                    <td>
                                     {item.date}
+                                   </td>
+                                   <td>
+                                    <select className="timelist" onChange={Timeonchange}>
+                                        <option value="#">--Select Time--</option>
+                                        <option value="9AM to 10AM">9AM to 10AM</option>
+                                        <option value="10AM to 11AM">10AM to 11AM</option>
+                                        <option value="11AM to 12AM">11AM to 12AM</option>
+                                        <option value="12AM to 1PM">12AM to 1PM</option>
+                                        <option value="1PM to 2PM">1PM to 2PM</option>
+                                        <option value="2PM to 3PM">2PM to 3PM</option>
+                                        <option value="3PM to 4PM">3PM to 4PM</option>
+                                        <option value="4PM to 5PM">4PM to 5PM</option>
+                                        <option value="5PM to 5PM">5PM to 5PM</option>
+                                        <option value="6PM to 7PM">6PM to 7PM</option>
+
+                                    </select>
                                    </td>
                                    <td>
                                     {item.task_status}
                                    </td>
                                    <td>
-                                    {item.test}
+                                    {/* {item.test} */}
+                                    <input type="file" onChange={handleFileChange}/>
                                    </td>
                                    <td>
-                                    <button id="upd" name="tbupdate"  style={{borderRadius:'4px'}}><Link to={`/tutor/${item.id}/${item.course}/courseupdate/${item.content}`} style={{textDecoration:'none'}}>Edit</Link></button>
+                                    <button id="upd" className="btn btn-danger" name="tbupdate"  style={{borderRadius:'7px', width:'90px'}}><Link to={`/tutor/${item.id}/${item.course}/courseupdate/${item.content}`} style={{textDecoration:'none',color:'white'}}>Edit</Link></button>
+                                    <button className="btn btn-success" style={{borderRadius:'7px', width:'90px', marginTop:'5px'}} onClick={()=>sendtask(id)}>Submit</button>
                                    </td>
                                 </tr>
-
                             </>
                         )}
                     </tbody>
 
                    </table>
-                   <center><button className="btn btn-primary" onClick={()=>getstudentlists(id)} >Show list of Students</button></center>
-                   <div>{getstudentlist}</div>
+                   <center><button className="btn btn-primary " id="getlist" onClick={()=>getstudentlists(id)} >Show list of Students</button></center>
+                                         
+    </div> 
+      {/* student list...table  */}
+         <center className="studentlist">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                
+                   {getstudentlist && getstudentlist.map((item,index)=>{
+                    return(
+                    <tr key={index}>
+                        <td>{item.id}</td>
+                        <td>{item.firstname}</td>
 
-                           
-    </div>
-                 
-                  
+                    </tr>)
+                   })}
+          </table>
+            </center>
                    </section>
                   
                    

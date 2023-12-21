@@ -21,6 +21,9 @@ import TutorUpdate from './tutorupdate';
 import StudentData from './stu';
 import Courses from './courseupdate';
 import Footer from './footer';
+import Studentprofile from './profiles/Studentprofile';
+import Admin from './profiles/Admin';
+import TutorProfile from './profiles/TutorProfile';
 
 
 
@@ -43,8 +46,6 @@ root.render(
     <Route path='/register' element={<Register/>}></Route>
     <Route path='/login' element={<Login/>}></Route>
     <Route path='/user/update/:id/:roletype' element={<Update/>}></Route>
-    
-
     <Route path='/user/tutorupdate/:id/:roletype' element={<TutorUpdate/>}></Route>
     <Route path='/tut' element={<TutorData/>}></Route>
     <Route path='/stu' element={<StudentData/>}></Route>
@@ -54,8 +55,8 @@ root.render(
     <Route path='/payment/:id' element={<Payment/>}></Route>
     <Route path='/finance' element={<Finance/>}></Route>
     <Route path='/footer' element={<Footer/>}></Route>
-   
-
+   {/* profiles */}
+    
 
 
   </Routes>
