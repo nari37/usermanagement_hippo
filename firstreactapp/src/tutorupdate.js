@@ -1,5 +1,5 @@
 import './update.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 
 import { useParams } from 'react-router-dom';
@@ -32,7 +32,7 @@ export default function TutorUpdate() {
     }
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         axios.get(`http://localhost:5000/tutorsingleuser/${id}`).then((res) => {
 
             setData({ firstname: res.data[0].firstname, email: res.data[0].email, password: res.data[0].password, course: res.data[0].course, roletype: res.data[0].roletype, assigned_to: res.data[0], status: res.data[0] })

@@ -5,7 +5,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
-
+const path = require('path'); // Add this line
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -351,7 +351,7 @@ app.get('/tutor/:id/:course', (req, res) => {
             console.error("Error executing SQL query:", err);
             res.status(500).json({ Message: 'Internal Server Error' });
         } else {
-            console.log("SQL query executed successfully:", results);
+            // console.log("SQL query executed successfully:", results);
             res.send(results);
         }
     })
@@ -450,7 +450,6 @@ app.get('/studen', (req, res) => {
         else {
             res.send(err)
         }
-
 
     })
 
@@ -672,39 +671,114 @@ app.post('/delrec/:id', (req, res) => {
 
 })
 
+// app.post('/deltut/:id', (req, res) => {
+//     console.log(req.params.id)
+//     connection.query('delete  from  `tutor` where id="' + req.params.id + '"', (err, row, fields) => {
+
+//         if (!err) {
+//             res.send(row)
+//         }
+//         else {
+//             res.send(err)
+//         }
+
+
+//     })
+
+// })
+
+// delete tutors from tutor table and assign_table.....
 app.post('/deltut/:id', (req, res) => {
-    console.log(req.params.id)
-    connection.query('delete  from  `tutor` where id="' + req.params.id + '"', (err, row, fields) => {
+    const tutorId = req.params.id;
 
-        if (!err) {
-            res.send(row)
+    // Check if there are associated records in student_tutor_assignment
+    connection.query('SELECT * FROM student_tutor_assignment WHERE tutor_id = ?', [tutorId], (err, rows) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Internal server error');
+            return;
         }
-        else {
-            res.send(err)
+
+        if (rows.length > 0) {
+            // There are associated records, handle accordingly (delete or update them)
+            connection.query('DELETE FROM student_tutor_assignment WHERE tutor_id = ?', [tutorId], (err) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).send('Internal server error');
+                } else {
+                    // Now, delete the tutor record
+                    connection.query('DELETE FROM tutor WHERE id = ?', [tutorId], (err, row) => {
+                        if (err) {
+                            console.error(err);
+                            res.status(500).send('Internal server error');
+                        } else {
+                            res.send(row);
+                        }
+                    });
+                }
+            });
+        } else {
+            // No associated records, directly delete the tutor record
+            connection.query('DELETE FROM tutor WHERE id = ?', [tutorId], (err, row) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).send('Internal server error');
+                } else {
+                    res.send(row);
+                }
+            });
         }
+    });
+});
 
 
-    })
-
-})
-
+// delete students from student table and assign_table.....
 app.post('/delstu/:id', (req, res) => {
-    console.log(req.params.id)
-    connection.query('delete  from  `student` where id="' + req.params.id + '"', (err, row, fields) => {
+    const studentId = req.params.id;
 
-        if (!err) {
-            res.send(row)
+    // Check if there are associated records in student_tutor_assignment
+    connection.query('SELECT * FROM student_tutor_assignment WHERE student_id = ?', [studentId], (err, rows) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Internal server error');
+            return;
         }
-        else {
-            res.send(err)
+
+        if (rows.length > 0) {
+            // There are associated records, handle accordingly (delete or update them)
+            connection.query('DELETE FROM student_tutor_assignment WHERE student_id = ?', [studentId], (err) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).send('Internal server error');
+                } else {
+                    // Now, delete the student record
+                    connection.query('DELETE FROM student WHERE id = ?', [studentId], (err, row) => {
+                        if (err) {
+                            console.error(err);
+                            res.status(500).send('Internal server error');
+                        } else {
+                            res.send(row);
+                        }
+                    });
+                }
+            });
+        } else {
+            // No associated records, directly delete the student record
+            connection.query('DELETE FROM student WHERE id = ?', [studentId], (err, row) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).send('Internal server error');
+                } else {
+                    res.send(row);
+                }
+            });
         }
+    });
+});
 
-
-    })
-
-})
 
 // get particular student list..
+
 // Get students assigned to a particular tutor..
 // app.post('/tutoridpost/:id',(req,res)=>{
 //     const id = req.params.id;
@@ -765,6 +839,7 @@ app.post('/delstu/:id', (req, res) => {
   
   
 // ....post two ids...
+
 app.post('/assign-student-tutor/:id/:tutorid', (req, res) => {
    
     const { id, tutorid } = req.params; // Use a single destructuring statement
@@ -825,10 +900,9 @@ app.get('/studentslists/:id', (req, res) => {
 });
 
 
-// send(post) time and taskfile to assigntable....
+// send(post) time and taskfile to assigntable_table 'whyaa' tutor....
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        // Corrected typo: 'cb' instead of 'cd'
         return cb(null, "./public/files");
     },
     filename: function(req, file, cb) {
@@ -836,32 +910,110 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage });
+// image filter
 
+const isImage = (req,file,callback)=>{
+    if(file.mimetype.startsWith("image")){
+        callback(null,true)
+    }else{
+        callback(null,Error("only image is allowed"))
+    }
+}
+
+const upload = multer({ storage,
+   fileFilter:isImage
+});
+
+// post the tutor tasks..
 app.post('/taskpost/:id', upload.single('file'), (req, res) => {
     console.log(req.params);
     console.log(req.body);
     console.log(req.file);
 
     const tutorid = req.params.id;
-    const { time } = req.body;
+    const { time,discription } = req.body;
+    
     const file = req.file; // No need to destructure req.file here
 
-    const sql = 'UPDATE student_tutor_assignment SET Time = ?, Test = ? WHERE tutor_id = ?';
+    const sql = 'UPDATE student_tutor_assignment SET Time = ?, Test = ?, discription = ? WHERE tutor_id = ?';
 
-    connection.query(sql, [time, file.filename, tutorid], (err, result) => {
+    connection.query(sql, [time, file.filename, discription, tutorid ], (err, result) => {
         if (err) {
             res.status(500).send('Internal server error');
             console.log(err);
         } else {
             console.log('Task inserted successfully');
-            res.status(200).send('Task inserted successfully');
+            res.status(200).json('Task inserted successfully');
         }
     });
 });
 
-// get the students taskfiles 
-app.get('get')
+// get the students  discription....
+app.get('/discription/:id',(req,res)=>{
+    const id = req.params.id;
+    const sql = 'SELECT * FROM student_tutor_assignment WHERE student_id = ?';
+    connection.query(sql,[id], (err,result)=>{
+        if(err){
+            console.log('Error exicuting sql query:',err);
+            return;
+        }else{
+            res.send(result)
+        }
+    })
+    
+})
+// get the students file...
+// Backend route for file download
+app.get('/download/:filePath', (req, res) => {
+    const filePath = path.join(__dirname, 'public/files', req.params.filePath);
+    console.log(filePath)
+    res.sendFile(filePath);
+});
+
+// send(post) taskfile to assigntable_table 'whyaa' students by there ids....
+const stor = multer.diskStorage({
+    destination: function(req, file, cb) {
+        return cb(null, "./public/studentsfiels");
+    },
+    filename: function(req, file, cb) {
+        return cb(null, `${Date.now()}_${file.originalname}`);
+    }
+});
+
+// docs filter...
+
+const isdoc = (req,file,callback)=>{
+    if(file.mimetype.startsWith("doc")){
+        callback(null,true)
+    }else{
+        callback(null,Error("only allowed docs"))
+    }
+}
+const save = multer({ stor,
+    fileFilter:isdoc
+ });
+//  post students tasks...
+ app.post('/studnet_stasks/:id', upload.single('file'), (req, res) => {
+    console.log(req.params.id);
+    console.log(req.file);
+
+    const studentsid = req.params.id;
+    
+    
+    const file = req.file; 
+
+    const sql = 'UPDATE student_tutor_assignment SET  student_tasks = ? WHERE student_id = ?';
+
+    connection.query(sql, [ file.filename, studentsid  ], (err, result) => {
+        if (err) {
+            res.status(500).send('Internal server error');
+            console.log(err);
+        } else {
+            console.log('Task inserted successfully');
+            res.status(200).json('Task inserted successfully');
+        }
+    });
+});
 
 
 const registeredEmails = new Set();

@@ -190,6 +190,7 @@ export default function Tutor(){
     const [getstudentlist,setgetstudentlist] = useState([]);
     const [file,setFile] = useState(null);
     const [selectedTime,setselectedTime] = useState('');
+    const [discript,setdiscription] = useState('')
      
     useEffect(() => {
 
@@ -237,15 +238,26 @@ export default function Tutor(){
          setFile(selectedFile)
          console.log("selected file:",selectedFile);
        }
-       
+       const discription = (e) =>{
+          const enterdiscript = e.target.value;
+          setdiscription(enterdiscript)
+         console.log("tutor discrtpt:",enterdiscript);
+          
+       }
+    // .......
        const sendtask = (id) => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('time', selectedTime);
-      
+        formData.append('discription', discript);
+
+        
+         
         axios.post(`http://localhost:5000/taskpost/${id}`, formData)
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
+          alert('task updated')
+               
       };
 
 
@@ -253,6 +265,15 @@ export default function Tutor(){
 //    get student list..
 
 const getstudentlists = (id)=>{
+    let togglestudnts = document.getElementById('toggled')
+
+    if(togglestudnts.style.display === 'none'){
+        togglestudnts.style.display ='block';
+       
+    }else{
+        togglestudnts.style.display ='none';
+    } 
+
     axios.get(`http://localhost:5000/studentslists/${id}`)
     .then(res =>setgetstudentlist(res.data))   
     .catch(err =>console.log(err))
@@ -265,10 +286,7 @@ const getstudentlists = (id)=>{
     return(
         <>
         <section>
-        {/* <div id="users" style={{margin:'20px 0 0 5px'}}>
-                    <button id="tutor" style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold'}}><Link to={'/tutor'} style={{color:"white",textDecoration:"none"}}>Tutor</Link></button> &nbsp;
-                    <button  id= "student"style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",color:"white",fontWeight:'bold'}}><Link  to={'/student'} style={{color:"white",textDecoration:"none"}}>Student</Link></button>
-                   </div> */}
+       
         <div>
         
         <caption align="center" style={{fontWeight:'bold' ,fontSize:'20px',color:'white',borderRadius:'0 10px 0 10px',background:'grey',margin:'5px'}} >Trainer</caption>
@@ -321,7 +339,7 @@ const getstudentlists = (id)=>{
 
                    </table>
                  
-                   <table id="taskdetails" className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)',borderRadius:'5px',display:'none',width:'775px',margin:'0 0 0 120px'}} >
+                   <table id="taskdetails" className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)',borderRadius:'5px',display:'none',maxWidth:'1000px',margin:'0 0 0 120px'}} >
                     <thead>
                         <tr >
                             
@@ -332,6 +350,7 @@ const getstudentlists = (id)=>{
                             <th>Time</th>
                             <th>Task Status</th>
                             <th>Test</th>
+                            <th>Discription</th>
                             <th>Action</th>
                             
                             
@@ -372,6 +391,9 @@ const getstudentlists = (id)=>{
                                     <input type="file" onChange={handleFileChange}/>
                                    </td>
                                    <td>
+                                    <textarea onChange={discription}></textarea>
+                                   </td>
+                                   <td>
                                     <button id="upd" className="btn btn-danger" name="tbupdate"  style={{borderRadius:'7px', width:'90px'}}><Link to={`/tutor/${item.id}/${item.course}/courseupdate/${item.content}`} style={{textDecoration:'none',color:'white'}}>Edit</Link></button>
                                     <button className="btn btn-success" style={{borderRadius:'7px', width:'90px', marginTop:'5px'}} onClick={()=>sendtask(id)}>Submit</button>
                                    </td>
@@ -386,11 +408,13 @@ const getstudentlists = (id)=>{
     </div> 
       {/* student list...table  */}
          <center className="studentlist">
-                <table>
-                    <thead>
-                        <tr>
+                <table id="toggled">
+                    <thead  >
+                        <tr style={{maxWidth:'1000px', background:'green', color:'white'}}>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Students Task</th>
+                            <th>Comment</th>
                         </tr>
                     </thead>
                 
@@ -399,6 +423,7 @@ const getstudentlists = (id)=>{
                     <tr key={index}>
                         <td>{item.id}</td>
                         <td>{item.firstname}</td>
+                        <td><center><button className="btn btn-primary">view</button></center></td>
 
                     </tr>)
                    })}

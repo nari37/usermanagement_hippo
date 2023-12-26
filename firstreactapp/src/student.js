@@ -189,6 +189,7 @@
  import 'bootstrap/dist/css/bootstrap.min.css';
  import { Link, useParams } from "react-router-dom";
 import './css/feedback.css';
+import { FaDownload } from "react-icons/fa";
 
 export default function Student() {
         const useParam = useParams();
@@ -198,9 +199,11 @@ export default function Student() {
      const [tutorinfo, setTutor] = useState([])
      const [studentinfo, setStudent] = useState([]);
 //    .....
-    const [tasks, setTasks] = useState([]);
+    const [taskfiles, setTaskfiles] = useState(null);
+    const [description, setDescription] = useState('');
+    const [Timeshedule,setTimeshedule] = useState('');
      const [progress, setProgress] = useState(0);
-
+     const [file,setFile] = useState(null);
 
      useEffect(() => {
          axios.get(`http://localhost:5000/student/${id}`).then((res) => {
@@ -208,21 +211,24 @@ export default function Student() {
          })
      }, [studentinfo, id])
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/tuto').then((res) => {
-
-            setTutor(res.data)
 
 
-            // Fetch tasks and progress (adjust the API calls based on your backend)
-        axios.get(`http://localhost:5000/tasks/${id}`).then((res) => {
-            setTasks(res.data);
-        });
 
-        // Set progress based on your backend data
-        setProgress(/* Set progress from your backend */);
-         })
-     }, [tutorinfo])
+    // useEffect(() => {
+    //     axios.get('http://localhost:5000/tuto').then((res) => {
+
+    //         setTutor(res.data)
+
+
+    //         // Fetch tasks and progress (adjust the API calls based on your backend)
+    //     axios.get(`http://localhost:5000/tasks/${id}`).then((res) => {
+    //         setTasks(res.data);
+    //     });
+
+    //     // Set progress based on your backend data
+    //     setProgress(/* Set progress from your backend */);
+    //      })
+    //  }, [])
 
     const feeddetails = () => {
         const feedbackinfo = { firstname: data.firstname, email: data.email, feedback: data.feedback }
@@ -259,6 +265,8 @@ export default function Student() {
      const Feedback = () => {
         let response = document.getElementById('feed');
 
+          // Set initial state to 'none'
+     
         if (response.style.display === "none") {
             response.style.display = "block";
         } else {
@@ -266,9 +274,62 @@ export default function Student() {
         }
 
      }
+  
+// ....get data 'task' from the tutor_student_assignment table...
+const mytasaks = ()=>{
+    const myt = document.getElementById('toggle')
+    // //set intially none..
+    //    myt.style.display = "none"; 
+    if(myt.style.display === 'none'){
+        myt.style.display = 'block';
+    }else{
+        myt.style.display = 'none';
+    }
 
+}
+// .....get discription and file from tutor_student_assignment...
+useEffect(() => {
+    axios.get(`http://localhost:5000/discription/${id}`)
+        .then(res => {
+            console.log(res.data);
+            const disc = res.data[0];
+            setDescription(disc.discription)
+            setTaskfiles(disc.Test)
+            setTimeshedule(disc.Time)
+        })
+        .catch(err => console.log(err));
+}, []);
+
+ 
+// download file function.....
+
+const downloadFile = async () => {
+    try {
+        // Trigger the file download by opening a new window with the file URL
+        window.open(`http://localhost:5000/download/${encodeURIComponent(taskfiles)}`, '_blank');
+    } catch (error) {
+        console.error('Error downloading file:', error);
+    }
+};
+
+
+// send (post) `students task` to...assign_students table..
+const handleFileChange = (e)=>{
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile)
+    console.log("selected file:",selectedFile);
+  }
+// ....
      const handileTask = ()=>{
-
+        const formData = new FormData();
+        formData.append('file',file)
+        axios.post(`http://localhost:5000/studnet_stasks/${id}`,formData)
+        .then(res=>{
+            console.log(res)
+            alert('task send successfully')
+            setFile('')
+        })
+        .catch(err=>console.log(err))
      }
 
   return (
@@ -277,7 +338,7 @@ export default function Student() {
       <table className="horizontal-table" >
         
         <thead>
-          <tr>
+          <tr >
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
@@ -292,6 +353,7 @@ export default function Student() {
             <th>Role</th>
             <th>Assigned To</th>
             <th>Status</th>
+            <th>Fee Details</th>
             <th>Fee Payment</th>
           </tr>
         </thead>
@@ -311,8 +373,10 @@ export default function Student() {
             <td>{item.remaining}</td>
             <td>{item.project}</td>
             <td>{item.roletype}</td>
+           
             <td value={tutorinfo.firstname}>{item.assigned_to}</td>
             <td>{item.status}</td>
+            <td>{item.fee_detail}</td>
             <td><Link to={`/payment/${id}`} style={{ textDecoration: 'none' }}>Pay</Link></td>
           </tr></>)}
          
@@ -353,14 +417,27 @@ export default function Student() {
 
             {/* Tasks Section */}
             <div className="tasks-container">
-                <h4>My Tasks</h4>
-                <ul>
-                    {tasks.map(task => (
-                        <li key={task.id}>{task.title}</li>
-                    ))}
-                </ul>
-                <button onClick={handileTask}>Submit Task</button>
+                <center><button className="btn btn-primary"  onClick={mytasaks}>Show My task</button></center>
+                <div style={{maxWidth:'500px', maxHeight:'300px',margin:'20px auto',border:'2px solid black', textAlign:'center', padding:'2rem',}} id="toggle">
+
+                 <div><p style={{maxWidth:'100%' ,wordWrap: 'break-word'}}>{description}</p></div>
+                 <div>  <center><button onClick={downloadFile} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Download</button></center></div>  
+                </div>
+
+
+                
+                 <center><h2>---Submit Task---</h2></center>
+                <center><input type="file" onChange={handleFileChange} /></center>
+                <center><button onClick={handileTask} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Upload Task</button></center>
             </div>
+              <center><h2>---Tutor Review---</h2>
+              <textarea style={{border:'1px solid black'}} readOnly></textarea></center>
+
+           {/* Display schedule or "no schedules yet..." */}
+           <center>
+           <h2>---My Schedule---</h2>
+           {Timeshedule ? <p>{Timeshedule}</p> : <p>No schedules yet...</p>}
+            </center>
 
             {/* Links Section */}
             <div className="links-container">

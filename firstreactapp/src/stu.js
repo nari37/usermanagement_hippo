@@ -11,6 +11,8 @@ export default function StudentData(){
     const [studentinfo,setStudent] = useState([]);
     const Nav = useNavigate();
     
+
+    console.log(studentinfo)
     useEffect(()=>{
         axios.get('http://localhost:5000/studen').then((res)=>{
             setStudent(res.data)
@@ -26,15 +28,20 @@ export default function StudentData(){
 
 
     const del = (id) => {
-           
-        axios.post(`http://localhost:5000/delstu/${id}`).then((res) => {
-            
+          const delationconfirm = window.confirm('Are you sure you want to delete') 
+          if(delationconfirm){
+            axios.post(`http://localhost:5000/delstu/${id}`).then(res => {
+                
                  alert('Record deleted successfully!!!!');
                 console.log({id});
                 Nav('/stu')
- 
-        })
+              console.log('deleted successfull')
+        }) 
      
+          }else{
+            console.log('delation cancelled..')
+          }
+        
      }
     return(
         <>
@@ -66,6 +73,7 @@ export default function StudentData(){
                             <th scope="col">Role</th>
                            
                             <th scope="col">Assigned-To</th>
+                            <th>feesdetails</th>
                             <th scope="col">Status</th>
                             <th scope="col">Actions_To_Take</th>
 
@@ -96,6 +104,7 @@ export default function StudentData(){
                                    
 
                                     <td value={tutorinfo.firstname}>{item.assigned_to}</td>
+                                    <td>{item.fees_detail}</td>
                                     
                                     <td>{item.status}</td>
 

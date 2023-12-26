@@ -113,9 +113,7 @@ export default function TutorData(){
      const Nav = useNavigate();
     useEffect(()=>{
         axios.get('http://localhost:5000/tuto').then((res)=>{
-            setTutor(res.data);
-            console.log(res)
-            
+            setTutor(res.data);      
         })
     },[tutorinfo,id]) 
 
@@ -128,15 +126,19 @@ export default function TutorData(){
     // },[val])
 
     const del = (id) => {
-           
-           axios.post(`http://localhost:5000/deltut/${id}`).then((res) => {
+
+        const deletedconfrom = window.confirm('Are you sure you want to delete');
+        if(deletedconfrom){
+            axios.post(`http://localhost:5000/deltut/${id}`).then((res) => {
                
-                    alert('Record deleted successfully!!!!');
-                   console.log({id});
-                   Nav('/tut')
-    
-           })
-        
+            alert('Record deleted successfully!!!!');
+           console.log({id});
+           Nav('/tut')
+          })
+
+        } else{
+            console.log('delation cancelled..')
+          }   
         }
 
 
