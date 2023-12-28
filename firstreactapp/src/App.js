@@ -75,7 +75,7 @@ return (
 {/*  */}
     <div    className='homepage ' >
        <div data-aos="fade-up" className='heading'><h2  >HippoCloud <br></br> <span ><q>Best place to learn</q></span></h2></div>
-       <div className='imagehippo'> <img data-aos="fade-up" src='https://pbs.twimg.com/media/ECeQfWWVUAAKRl8?format=png&name=small' /></div> 
+       <div className='imagehippo'> <img data-aos="fade-up" src='https://pbs.twimg.com/media/ECeQfWWVUAAKRl8?format=png&name=small' alt=''/></div> 
     </div>
 {/*  */}
     <div   className='whychoose'>
@@ -88,7 +88,7 @@ return (
        </div>
     </div>
     {/*  */}
-     <div className='overservices'>
+     <div className='overservices' data-aos="fade-up">
         <center>
           <h2 data-aos="fade-up">Our <span>Services</span></h2>  
         </center>

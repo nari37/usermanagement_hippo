@@ -190,6 +190,8 @@
  import { Link, useParams } from "react-router-dom";
 import './css/feedback.css';
 import { FaDownload } from "react-icons/fa";
+import Tutor from "./tutor";
+
 
 export default function Student() {
         const useParam = useParams();
@@ -298,7 +300,7 @@ useEffect(() => {
             setTimeshedule(disc.Time)
         })
         .catch(err => console.log(err));
-}, []);
+}, [id]);
 
  
 // download file function.....
@@ -309,6 +311,7 @@ const downloadFile = async () => {
         window.open(`http://localhost:5000/download/${encodeURIComponent(taskfiles)}`, '_blank');
     } catch (error) {
         console.error('Error downloading file:', error);
+        alert('please choose file')
     }
 };
 
@@ -323,13 +326,16 @@ const handleFileChange = (e)=>{
      const handileTask = ()=>{
         const formData = new FormData();
         formData.append('file',file)
+       
         axios.post(`http://localhost:5000/studnet_stasks/${id}`,formData)
         .then(res=>{
             console.log(res)
             alert('task send successfully')
             setFile('')
+            return
         })
         .catch(err=>console.log(err))
+        
      }
 
   return (
@@ -426,7 +432,7 @@ const handleFileChange = (e)=>{
 
 
                 
-                 <center><h2>---Submit Task---</h2></center>
+                <h2>---Submit Task---</h2>
                 <center><input type="file" onChange={handleFileChange} /></center>
                 <center><button onClick={handileTask} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Upload Task</button></center>
             </div>
@@ -473,8 +479,11 @@ const handleFileChange = (e)=>{
                 </div>
             </div>
         </div>
+       
     </div>
-
+  
 
   );
+  
+  
 }

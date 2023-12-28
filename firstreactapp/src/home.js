@@ -98,11 +98,11 @@ export default function Menu() {
                     {/* Home Page */}
                     <li><Link to='/'><i class="bi bi-house-fill"></i>Home</Link></li>
                      {/* Profile Page */}
-                     <li>
+                     {/* <li>
                     <Link to={UserProfile}>
                             <i className="bi bi-person-fill"></i>Profile
                         </Link>
-                     </li>
+                     </li> */}
                     {/* Contact Page */}
                     <li><Link to='/first' ><i class="bi bi-person-lines-fill"></i>Contact</Link></li>
 

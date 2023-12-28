@@ -383,7 +383,7 @@ export default function Login() {
             })
             .catch((err) => {
                 console.error('Login Error:', err);
-                alert('Login failed');
+               
             });
             
           

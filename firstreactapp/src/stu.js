@@ -104,7 +104,7 @@ export default function StudentData(){
                                    
 
                                     <td value={tutorinfo.firstname}>{item.assigned_to}</td>
-                                    <td>{item.fees_detail}</td>
+                                    <td>{item.fee_detail}</td>
                                     
                                     <td>{item.status}</td>
 

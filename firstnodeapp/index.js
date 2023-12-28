@@ -292,6 +292,24 @@ app.post('/testingupdate/:content', (req, res) => {
 
 })
 
+app.post('/devopsupdate/:content', (req, res) => {
+
+    console.log(req.body);
+
+    connection.query('update  `devops` set course="' + req.body.course + '",content="' + req.body.content + '",date="' + req.body.date + '",task_status="' + req.body.task_status + '" , test="' + req.body.test + '" where content="' + req.params.content + '"', (err, row, fields) => {
+
+
+        if (!err) {
+            res.send(row)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
 // user data get api
 
 app.get('/userinfo', (req, res) => {
@@ -389,6 +407,21 @@ app.post('/fullstack', (req, res) => {
 app.post('/testing', (req, res) => {
 
     connection.query('select * from  `testing`  ', (err, rows, fields) => {
+
+        if (!err) {
+            res.send(rows)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
+app.post('/devops', (req, res) => {
+
+    connection.query('select * from  `devops`  ', (err, rows, fields) => {
 
         if (!err) {
             res.send(rows)
@@ -589,9 +622,9 @@ server.listen(5000, () => {
 
 app.post('/contactreg', (req, res) => {
 
-    console.log(req.body);
+    console.log('coming',req.body);
 
-    connection.query('insert into contact(name,email,comment) values("' + req.body.name + '","' + req.body.email + '","' + req.body.comment + '")', (err, row, fields) => {
+    connection.query('insert into contact(name,email,subject,phonenumber,comment) values("' + req.body.name + '","' + req.body.email + '","'+ req.body.subject +'","'+ req.body.phonenumber +'","' + req.body.comment + '")', (err, row, fields) => {
 
         if (!err) {
             res.send(row)
@@ -973,7 +1006,7 @@ app.get('/download/:filePath', (req, res) => {
 // send(post) taskfile to assigntable_table 'whyaa' students by there ids....
 const stor = multer.diskStorage({
     destination: function(req, file, cb) {
-        return cb(null, "./public/studentsfiels");
+        return cb(null, "./public/files");
     },
     filename: function(req, file, cb) {
         return cb(null, `${Date.now()}_${file.originalname}`);
@@ -992,6 +1025,7 @@ const isdoc = (req,file,callback)=>{
 const save = multer({ stor,
     fileFilter:isdoc
  });
+
 //  post students tasks...
  app.post('/studnet_stasks/:id', upload.single('file'), (req, res) => {
     console.log(req.params.id);
@@ -1014,6 +1048,31 @@ const save = multer({ stor,
         }
     });
 });
+
+// get file from assign tutortable...
+app.get('/student_tasks/:id',(req,res)=>{
+    console.log("studnetid.",req.params.id)
+    const id = req.params.id;
+    const sql = 'SELECT * FROM student_tutor_assignment WHERE student_id = ?';
+    connection.query(sql,[id], (err,result)=>{
+        if(err){
+            console.log('Error exicuting sql query:',err);
+            return;
+        }else{
+            res.send(result)
+            
+        }
+    })
+
+})
+
+app.get('/download/:filePath', (req, res) => {
+    const filePath = path.join(__dirname, 'public/files', req.params.filePath);
+    console.log(filePath)
+    res.sendFile(filePath);
+});
+
+
 
 
 const registeredEmails = new Set();

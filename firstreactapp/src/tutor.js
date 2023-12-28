@@ -190,7 +190,9 @@ export default function Tutor(){
     const [getstudentlist,setgetstudentlist] = useState([]);
     const [file,setFile] = useState(null);
     const [selectedTime,setselectedTime] = useState('');
-    const [discript,setdiscription] = useState('')
+    const [discript,setdiscription] = useState('');
+    const [studenttasks,setstudenttasks] = useState(null);
+    
      
     useEffect(() => {
 
@@ -205,6 +207,10 @@ export default function Tutor(){
                 axios.post('http://localhost:5000/testing').then((res) => {
                     setCourse(res.data);
                 });
+            }else if(res.data[0].course==='Devops'){
+                axios.post('http://localhost:5000/devops').then((res)=>{
+                    setCourse(res.data);
+                })
             }
         });
     }, [id, course]);
@@ -265,6 +271,7 @@ export default function Tutor(){
 //    get student list..
 
 const getstudentlists = (id)=>{
+
     let togglestudnts = document.getElementById('toggled')
 
     if(togglestudnts.style.display === 'none'){
@@ -278,6 +285,31 @@ const getstudentlists = (id)=>{
     .then(res =>setgetstudentlist(res.data))   
     .catch(err =>console.log(err))
 }
+
+// view students task..
+const viewtask = async (studentid) => {
+    console.log('student id', studentid);
+
+    try {
+        const response = await axios.get(`http://localhost:5000/student_tasks/${studentid}`);
+        
+        if (response.data.length === 0) {
+            // Show alert that no data is available
+            alert("No files uploaded by the student.");
+            return;
+        }
+
+        const stdata = response.data[0];
+        setstudenttasks(stdata.student_tasks);
+
+        // Trigger the file download by opening a new window with the file URL
+        window.open(`http://localhost:5000/download/${encodeURIComponent(stdata.student_tasks)}`, '_blank');
+    } catch (err) {
+        console.log('error in view', err);
+        alert('file not found')
+        // Handle error as needed
+    }
+};
 
 
     
@@ -378,7 +410,7 @@ const getstudentlists = (id)=>{
                                         <option value="2PM to 3PM">2PM to 3PM</option>
                                         <option value="3PM to 4PM">3PM to 4PM</option>
                                         <option value="4PM to 5PM">4PM to 5PM</option>
-                                        <option value="5PM to 5PM">5PM to 5PM</option>
+                                        <option value="5PM to 5PM">5PM to 6PM</option>
                                         <option value="6PM to 7PM">6PM to 7PM</option>
 
                                     </select>
@@ -408,22 +440,23 @@ const getstudentlists = (id)=>{
     </div> 
       {/* student list...table  */}
          <center className="studentlist">
-                <table id="toggled">
-                    <thead  >
-                        <tr style={{maxWidth:'1000px', background:'green', color:'white'}}>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Students Task</th>
-                            <th>Comment</th>
+                <table id="toggled" style={{maxWidth:'80%'}}>
+                   
+                        <tr style={{ background:'green', color:'white',}}>
+                            <th colSpan='25'>ID</th>
+                            <th colSpan='25'>Name</th>
+                            <th colSpan='25'>Comment</th>
+                            <th colSpan='25'>Students Task</th>
                         </tr>
-                    </thead>
+                    
                 
                    {getstudentlist && getstudentlist.map((item,index)=>{
                     return(
                     <tr key={index}>
-                        <td>{item.id}</td>
-                        <td>{item.firstname}</td>
-                        <td><center><button className="btn btn-primary">view</button></center></td>
+                        <td colSpan='25'>{item.id}</td>
+                        <td colSpan='25'>{item.firstname}</td>
+                        <td colSpan='25'>{item.tutor_reviews}</td>
+                        <td colSpan='25'><center><button className="btn btn-primary" onClick={()=>viewtask(item.id)}>view</button></center></td>
 
                     </tr>)
                    })}
