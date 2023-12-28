@@ -190,7 +190,7 @@
  import { Link, useParams } from "react-router-dom";
 import './css/feedback.css';
 import { FaDownload } from "react-icons/fa";
-import Tutor from "./tutor";
+
 
 
 export default function Student() {
@@ -206,6 +206,9 @@ export default function Student() {
     const [Timeshedule,setTimeshedule] = useState('');
      const [progress, setProgress] = useState(0);
      const [file,setFile] = useState(null);
+     const [tutorreview,settutorreview] = useState('');
+
+
 
      useEffect(() => {
          axios.get(`http://localhost:5000/student/${id}`).then((res) => {
@@ -295,9 +298,10 @@ useEffect(() => {
         .then(res => {
             console.log(res.data);
             const disc = res.data[0];
-            setDescription(disc.discription)
-            setTaskfiles(disc.Test)
-            setTimeshedule(disc.Time)
+            setDescription(disc.discription);
+            setTaskfiles(disc.Test);
+            setTimeshedule(disc.Time);
+            settutorreview(disc.tutor_review);
         })
         .catch(err => console.log(err));
 }, [id]);
@@ -330,13 +334,16 @@ const handleFileChange = (e)=>{
         axios.post(`http://localhost:5000/studnet_stasks/${id}`,formData)
         .then(res=>{
             console.log(res)
-            alert('task send successfully')
+            alert('task uploaded successfully')
             setFile('')
             return
         })
         .catch(err=>console.log(err))
         
      }
+    //  get tutor review..
+
+   
 
   return (
     <div className="student-table" style={{marginTop:'50px'}}>
@@ -410,7 +417,7 @@ const handleFileChange = (e)=>{
       {/* ............ */}
       <div className="student-dashboard" style={{ marginTop: '50px' }}>
             <div className="dashboard-header">
-                <h2>Welcome, {data.firstname}!</h2>
+                <h3 style={{color:'#0a5275',fontWeight:'600'}}>Welcome, {data.firstname}!</h3>
             </div>
 
             {/* Progress Bar */}
@@ -420,41 +427,36 @@ const handleFileChange = (e)=>{
                     <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                 </div>
             </div>
-
+       {/* Display schedule or "no schedules yet..." */}
+           <center style={{marginTop:'15px'}}>
+           <h3>---My Schedule---</h3>
+           {Timeshedule ? <p>{Timeshedule}</p> : <p>No schedules yet...</p>}
+            </center>
             {/* Tasks Section */}
             <div className="tasks-container">
                 <center><button className="btn btn-primary"  onClick={mytasaks}>Show My task</button></center>
-                <div style={{maxWidth:'500px', maxHeight:'300px',margin:'20px auto',border:'2px solid black', textAlign:'center', padding:'2rem',}} id="toggle">
+                <div style={{maxWidth:'500px', maxHeight:'300px',margin:'20px auto',border:'2px solid black', textAlign:'center', padding:'2rem',display:'none'}} id="toggle" >
 
                  <div><p style={{maxWidth:'100%' ,wordWrap: 'break-word'}}>{description}</p></div>
-                 <div>  <center><button onClick={downloadFile} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Download</button></center></div>  
+                 <div>  <center><button onClick={downloadFile} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Download Task</button></center></div>  
                 </div>
 
 
                 
-                <h2>---Submit Task---</h2>
+                <center style={{marginTop:'15px'}}> <h3>---Submit Task---</h3></center>
                 <center><input type="file" onChange={handleFileChange} /></center>
                 <center><button onClick={handileTask} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Upload Task</button></center>
             </div>
-              <center><h2>---Tutor Review---</h2>
-              <textarea style={{border:'1px solid black'}} readOnly></textarea></center>
+              <center style={{marginTop:'15px'}}><h3>---Tutor Review---</h3>
+              <textarea style={{border:'1px solid black'}} readOnly value={tutorreview}>
+             
+                
+                </textarea></center>
 
-           {/* Display schedule or "no schedules yet..." */}
-           <center>
-           <h2>---My Schedule---</h2>
-           {Timeshedule ? <p>{Timeshedule}</p> : <p>No schedules yet...</p>}
-            </center>
+         
 
             {/* Links Section */}
-            <div className="links-container">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><Link to="/html">HTML</Link></li>
-                    <li><Link to="/css">CSS</Link></li>
-                    <li><Link to="/react">React</Link></li>
-                    {/* Add more links as needed */}
-                </ul>
-            </div>
+           
 
             {/* Your existing table and feedback form... */}
             <div className="student-table">

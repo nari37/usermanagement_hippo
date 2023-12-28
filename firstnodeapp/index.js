@@ -1072,6 +1072,27 @@ app.get('/download/:filePath', (req, res) => {
     res.sendFile(filePath);
 });
 
+// tutor comment...
+app.post('/tutorcomment/:id', (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+  
+    const studentid = req.params.id;
+    const {tutor_review } = req.body; // Use the correct property name
+  
+    // Use SET keyword in the SQL query and specify the column name
+    const sql = 'UPDATE student_tutor_assignment SET tutor_review = ? WHERE student_id = ?';
+  
+    connection.query(sql, [tutor_review, studentid], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Internal server error');
+      } else {
+        console.log('Comment inserted successfully');
+        res.status(200).send(result);
+      }
+    });
+  });
 
 
 

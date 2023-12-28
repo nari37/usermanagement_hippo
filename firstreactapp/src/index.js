@@ -24,6 +24,7 @@ import Footer from './footer';
 import Studentprofile from './profiles/Studentprofile';
 import Admin from './profiles/Admin';
 import TutorProfile from './profiles/TutorProfile';
+import Tutorcomment from './Tutorcomment';
 
 
 
@@ -54,6 +55,9 @@ root.render(
     <Route path='/student/:id' element={<Student/>}></Route>
     <Route path='/payment/:id' element={<Payment/>}></Route>
     <Route path='/finance' element={<Finance/>}></Route>
+    
+    <Route path='/tutorcomment/:id' element={<Tutorcomment/>}></Route>
+
     <Route path='/footer' element={<Footer/>}></Route>
    {/* profiles */}
     

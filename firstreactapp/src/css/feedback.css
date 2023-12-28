@@ -1,4 +1,8 @@
   
+
+  *{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
   .feedbackfrom{
     max-width: 500px;
     margin: 10px auto;

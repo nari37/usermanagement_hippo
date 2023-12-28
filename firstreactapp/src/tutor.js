@@ -179,6 +179,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useParams, Link} from "react-router-dom";
 import '../src/tutor.css';
+import Tutorcomment from "./Tutorcomment";
 
 
 export default function Tutor(){
@@ -224,6 +225,7 @@ export default function Tutor(){
 
     const task = () =>{
         let task1 = document.getElementById('taskdetails');
+       
     
         if(task1.style.display === 'none'){
             task1.style.display = 'block'
@@ -274,11 +276,11 @@ const getstudentlists = (id)=>{
 
     let togglestudnts = document.getElementById('toggled')
 
-    if(togglestudnts.style.display === 'none'){
-        togglestudnts.style.display ='block';
+    if(togglestudnts.style.display === 'block'){
+        togglestudnts.style.display ='none';
        
     }else{
-        togglestudnts.style.display ='none';
+        togglestudnts.style.display ='block';
     } 
 
     axios.get(`http://localhost:5000/studentslists/${id}`)
@@ -371,7 +373,7 @@ const viewtask = async (studentid) => {
 
                    </table>
                  
-                   <table id="taskdetails" className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)',borderRadius:'5px',display:'none',maxWidth:'1000px',margin:'0 0 0 120px'}} >
+                   <table id="taskdetails" className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)',borderRadius:'5px',display:'none',maxWidth:'70%', margin:'10px auto'}} >
                     <thead>
                         <tr >
                             
@@ -435,33 +437,34 @@ const viewtask = async (studentid) => {
                     </tbody>
 
                    </table>
+                 
                    <center><button className="btn btn-primary " id="getlist" onClick={()=>getstudentlists(id)} >Show list of Students</button></center>
                                          
     </div> 
       {/* student list...table  */}
-         <center className="studentlist">
-                <table id="toggled" style={{maxWidth:'80%'}}>
+         <div className="studentlist" id="toggled" style={{display:'none',margin:'10px auto' }} >
+                <table  style={{maxWidth:'70%'}} >
                    
-                        <tr style={{ background:'green', color:'white',}}>
+                        <tr style={{ background:'green', color:'white',}} id='tb'>
                             <th colSpan='25'>ID</th>
                             <th colSpan='25'>Name</th>
-                            <th colSpan='25'>Comment</th>
                             <th colSpan='25'>Students Task</th>
+                            <th colSpan='25'>Review</th>
                         </tr>
                     
                 
-                   {getstudentlist && getstudentlist.map((item,index)=>{
+                   {getstudentlist && getstudentlist.map((item,index,id)=>{
                     return(
-                    <tr key={index}>
-                        <td colSpan='25'>{item.id}</td>
+                    <tr key={id}>
+                        <td colSpan='25'>{index+1}</td>
                         <td colSpan='25'>{item.firstname}</td>
-                        <td colSpan='25'>{item.tutor_reviews}</td>
+                   
                         <td colSpan='25'><center><button className="btn btn-primary" onClick={()=>viewtask(item.id)}>view</button></center></td>
-
+                    <Link to={`/tutorcomment/${item.id}`} style={{padding:'50px',}} element={<Tutorcomment/>} >Review</Link>
                     </tr>)
                    })}
           </table>
-            </center>
+            </div>
                    </section>
                   
                    

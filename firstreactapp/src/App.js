@@ -84,7 +84,7 @@ return (
        </center>
        <div className='whyflex'>
        <div className='wyimg'><img data-aos="fade-up" src='https://img.freepik.com/free-vector/about-us-concept-illustration_114360-639.jpg?w=740&t=st=1702279211~exp=1702279811~hmac=3976e9dd1c8291676b8a451334af706148b8f4df7ef34283fe69daaf792e4c43'/></div>
-        <div className='pera' data-aos="fade-up"><center><span data-aos="fade-up">Why choose <span id='hip' data-aos="fade-up">HippoCloud?</span></span></center><p data-aos="fade-up">HippoCloud is first software develepment IT company at Vishakhapatnam.Over develepment team's  </p></div> 
+        <div className='pera' data-aos="fade-up"><center><span data-aos="fade-up">Why choose <span id='hip' data-aos="fade-up">HippoCloud?</span></span></center><p data-aos="fade-up">HippoCloud is the first software develepment IT company at <b>Vishakhapatnam</b> location. Over develepment team deals multy a   </p></div> 
        </div>
     </div>
     {/*  */}
