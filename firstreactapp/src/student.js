@@ -190,7 +190,7 @@
  import { Link, useParams } from "react-router-dom";
 import './css/feedback.css';
 import { FaDownload } from "react-icons/fa";
-
+import Tutor from "./tutor";
 
 
 export default function Student() {
