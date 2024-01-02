@@ -79,10 +79,10 @@ export default function StudentData(){
                         </tr>
                     </thead>
                     <tbody align="center" style={{fontSize:'20px',fontFamily:'bahnschrift condensed'}} >
-                        {studentinfo.map((item) =>
+                        {studentinfo.map((item,index) =>
                             <>
                                 <tr key={item.id} >
-                                    <th scope="row">{item.id}</th>
+                                    <th scope="row">{index+1}</th>
                                     <td>{item.firstname}</td>
                                     
                                     <td>{item.email}</td>

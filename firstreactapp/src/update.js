@@ -1,9 +1,6 @@
 import './update.css';
 import React from 'react';
-
-
 import { useParams } from 'react-router-dom';
-
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -42,6 +39,9 @@ export default function Update() {
 const [tutordata, settutorData] = useState('');
 const [tutorid,setTouid] = useState('');
 const [remain,setremmaning] = useState('');
+const [disco,setDiscount] = useState('');
+
+
      
     const handler = (e) => {
 
@@ -66,7 +66,7 @@ const [remain,setremmaning] = useState('');
         
         dis =(diff/actual)*100;
         document.getElementById('discount').value = dis;
-
+         setDiscount(dis);
     }
      
     const balance = () => {
@@ -86,6 +86,7 @@ const [remain,setremmaning] = useState('');
 
   // Update the 'remainbalance' field using React state
  document.getElementById('remainbalance').value = remainingBalance;
+ setremmaning(remainingBalance)
 };
 
     
@@ -133,7 +134,7 @@ useEffect(() => {
 
     const update = (id,tutorid) => {
        
-        const userdetails = { firstname: data.firstname, email: data.email, password: data.password,course: data.course,content: data.content,actual:data.actual,total: data.total,discount:data.discount,paid: data.paid,remaining: data.remaining,start:data.start,end:data.end,project:data.project, roletype: data.roletype, assigned_to: data.assigned_to, status: data.status, fee_detail: data.fee_detail}
+        const userdetails = { firstname: data.firstname, email: data.email, password: data.password,course: data.course,content: data.content,actual:data.actual,total: data.total,discount:disco,paid: data.paid,remaining:remain,start:data.start,end:data.end,project:data.project, roletype: data.roletype, assigned_to: data.assigned_to, status: data.status, fee_detail: data.fee_detail}
            console.log(userdetails) 
         axios.post(`http://localhost:5000/updateuser/${id}`, userdetails)
         .then((res) => {

@@ -1,0 +1,65 @@
+.footer{
+  background-color: rgb(48, 45, 45);
+  max-width: 100%;
+  padding: 20px;
+ height: auto;
+}
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 250px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-around;
+}
+.flex img{
+   margin-left: 0px;
+   max-width: 18rem ;
+}
+.flex ul{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 2rem;
+   margin-left: 30px;
+   margin-top: 10px;
+}
+
+.flex ul a{
+    color: whitesmoke;
+}
+.flex i:hover{
+    color: rgb(20, 148, 148);
+    transition: 0.6s;
+    transform: translateY(10px);
+}
+.about ul{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: whitesmoke;
+    gap: 10px;
+    margin-left: -15px;
+}
+.about ul a{
+    font-size: 1.4rem;
+    color: whitesmoke;
+}
+.about ul a:hover{
+    color: rgb(20, 148, 148);
+}
+.conect .contact-icons{
+    display: flex;
+    gap: 1.4rem;
+    flex-direction: column;
+}
+
+.about .tran:hover{
+    transition: 0.6s;
+    transform: translateX(10px);
+}
+@media (max-width:'791px') {
+    .flex{
+      
+    }
+}
