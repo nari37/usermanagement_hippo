@@ -212,7 +212,15 @@ export default function Tutor(){
                 axios.post('http://localhost:5000/devops').then((res)=>{
                     setCourse(res.data);
                 })
-            }
+            }else if (res.data[0].course === 'Tally') {
+                axios.post('http://localhost:5000/tally').then((res) => {
+                    setCourse(res.data);
+                })}
+                else if(res.data[0].course === 'Digital_Marketing') {
+                    axios.post('http://localhost:5000/marketing').then((res) => {
+                        setCourse(res.data);
+                    })}
+
         });
     }, [id, course]);
 
@@ -323,7 +331,7 @@ const viewtask = async (studentid) => {
        
         <div>
         
-        <caption align="center" style={{fontWeight:'bold' ,fontSize:'20px',color:'white',borderRadius:'0 10px 0 10px',background:'grey',margin:'5px'}} >Trainer</caption>
+        <caption align="center" style={{fontWeight:'bold' ,fontSize:'20px',color:'white',borderRadius:'0 10px 0 10px',background:'grey',margin:'5px',marginTop:'40px'}} >Trainer</caption>
                 <table className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)'}} >
                     <thead>
                         <tr align="center" >
@@ -448,8 +456,8 @@ const viewtask = async (studentid) => {
                         <tr style={{ background:'green', color:'white',}} id='tb'>
                             <th colSpan='25'>ID</th>
                             <th colSpan='25'>Name</th>
-                            <th colSpan='25'>Students Task</th>
-                            <th colSpan='25'>Review</th>
+                            <th colSpan='25' style={{textAlign:'center'}}>Students Task</th>
+                            <th colSpan='25' style={{textAlign:'center'}}>Review</th>
                         </tr>
                     
                 
@@ -460,7 +468,7 @@ const viewtask = async (studentid) => {
                         <td colSpan='25'>{item.firstname}</td>
                    
                         <td colSpan='25'><center><button className="btn btn-primary" onClick={()=>viewtask(item.id)}>view</button></center></td>
-                    <Link to={`/tutorcomment/${item.id}`} style={{padding:'50px',}} element={<Tutorcomment/>} >Review</Link>
+                    <Link to={`/tutorcomment/${item.id}`} style={{textAlign:'center'}} element={<Tutorcomment/>} >Review</Link>
                     </tr>)
                    })}
           </table>

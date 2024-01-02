@@ -310,6 +310,43 @@ app.post('/devopsupdate/:content', (req, res) => {
     })
 
 })
+
+app.post('/tallyupdate/:content', (req, res) => {
+
+    console.log(req.body);
+
+    connection.query('update  `tally` set course="' + req.body.course + '",content="' + req.body.content + '",date="' + req.body.date + '",task_status="' + req.body.task_status + '" , test="' + req.body.test + '" where content="' + req.params.content + '"', (err, row, fields) => {
+
+
+        if (!err) {
+            res.send(row)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
+app.post('/marketingupdate/:content', (req, res) => {
+
+    console.log(req.body);
+
+    connection.query('update  `digital_marketing` set course="' + req.body.course + '",content="' + req.body.content + '",date="' + req.body.date + '",task_status="' + req.body.task_status + '" , test="' + req.body.test + '" where content="' + req.params.content + '"', (err, row, fields) => {
+
+
+        if (!err) {
+            res.send(row)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
 // user data get api
 
 app.get('/userinfo', (req, res) => {
@@ -436,7 +473,36 @@ app.post('/devops', (req, res) => {
 })
 
 
+app.post('/tally', (req, res) => {
 
+    connection.query('select * from  `tally`  ', (err, rows, fields) => {
+
+        if (!err) {
+            res.send(rows)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
+app.post('/marketing', (req, res) => {
+
+    connection.query('select * from  `digital_marketing`  ', (err, rows, fields) => {
+
+        if (!err) {
+            res.send(rows)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
 
 // to get student details in dropdown select options.
 app.get('/role/:id', (req, res) => {
@@ -581,6 +647,53 @@ app.get('/fullstack/:content', (req, res) => {
 app.get('/testing/:content', (req, res) => {
     console.log(req.params.content)
     connection.query('select * from  `testing` where course="Testing" and content="' + req.params.content + '" ', (err, row, fields) => {
+
+        if (!err) {
+            res.send(row)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
+
+app.get('/devops/:content', (req, res) => {
+    console.log(req.params.content)
+    connection.query('select * from  `devops` where course="Devops" and content="' + req.params.content + '" ', (err, row, fields) => {
+
+        if (!err) {
+            res.send(row)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
+
+app.get('/tally/:content', (req, res) => {
+    console.log(req.params.content)
+    connection.query('select * from  `tally` where course="Tally" and content="' + req.params.content + '" ', (err, row, fields) => {
+
+        if (!err) {
+            res.send(row)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
+app.get('/marketing/:content', (req, res) => {
+    console.log(req.params.content)
+    connection.query('select * from  `digital_marketing` where course="Digital_Marketing" and content="' + req.params.content + '" ', (err, row, fields) => {
 
         if (!err) {
             res.send(row)

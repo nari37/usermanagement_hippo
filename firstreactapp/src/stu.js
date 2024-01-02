@@ -12,7 +12,6 @@ export default function StudentData(){
     const Nav = useNavigate();
     
 
-    console.log(studentinfo)
     useEffect(()=>{
         axios.get('http://localhost:5000/studen').then((res)=>{
             setStudent(res.data)
@@ -47,7 +46,7 @@ export default function StudentData(){
         <>
         <section>
         <div id="users" style={{margin:'20px 0 0 5px'}}>
-                    <button id="tutor" style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold'}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
+                    <button id="tutor" style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold',marginLeft:'100px',bottom:'-50px',position:'relative', padding:'10px',borderRadius:'0 10px 0 10px'}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
                     
                    </div>
         <div>

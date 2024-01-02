@@ -146,7 +146,7 @@ export default function TutorData(){
         <>
         <section>
         <div id="users" style={{margin:'20px 0 0 5px'}}>
-                    <button id="tutor" style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold'}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
+                    <button id="tutor" style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold',marginLeft:'90px',position:'relative',bottom:'-50px',padding:'10px',borderRadius:'0 10px 0 10px'}}><Link to={'/users'} style={{color:"white",textDecoration:"none",}}>Back</Link></button> &nbsp;
                     {/* <button  id= "student"style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",color:"white",fontWeight:'bold'}}><Link  to={'/student'} style={{color:"white",textDecoration:"none"}}>Student</Link></button> */}
                    </div>
         <div>

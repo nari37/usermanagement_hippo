@@ -114,7 +114,8 @@ export default function TutorUpdate() {
                                                     <option>Full Stack</option>
                                                     <option >Devops</option>
                                                     <option >Testing</option>
-                                                    <option >Sales Force</option>
+                                                    <option >Tally</option>
+                                                    <option >Digital_Marketing</option>
                                                 </select>
                                             </div>&emsp;
                                             

@@ -57,8 +57,8 @@ axios.post(`http://localhost:5000/tutorcomment/${id}`, { tutor_review: review })
           <h2>Tutor Comment Box</h2>
           <textarea  placeholder="Type your comment here..." onChange={comment} ></textarea>
           <br />
-          <button onClick={submitComment} style={{cursor:'pointer'}}>Send</button>&emsp;
-          <button onClick={goBack} style={{background:'blue'}}>Back</button>
+          <button onClick={submitComment} className='btn btn-success'>Send</button>&emsp;
+          <button onClick={goBack} style={{background:'blue'}} className='btn btn-primary'>Back</button>
         </div>
       );
 }

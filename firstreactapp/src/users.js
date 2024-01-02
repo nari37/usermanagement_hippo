@@ -31,7 +31,7 @@ export default function Users() {
     useEffect(()=>{
         axios.get('http://localhost:5000/studen').then((res)=>{
             setStudent(res.data)
-            console.log(res.data)
+           
         })
     },[])
 
@@ -197,7 +197,7 @@ export default function Users() {
 
 
                 <div id="contdetails" style={{display:'none'}}>
-                <button onClick={back} style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold',margin:'-300px 0 0 0'}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
+                <button onClick={back} style={{borderRadius:'0 10px 0 10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold',bottom:'-50px',position:'relative',marginLeft:'160px',padding:'10px',}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
                     <caption align="center" style={{ fontWeight: 'bold', fontSize: '20px', color: 'white', borderRadius: '0 10px 0 10px', background: 'grey', margin: '5px' }} >Contact_Details</caption>
                     <table id="data-table2" class="table table-bordered" style={{ borderColor: 'white', background: 'rgba(0, 0, 0,0.2)',fontFamily:'bahnschrift condensed' }}>
 
@@ -226,7 +226,7 @@ export default function Users() {
                     </table><br /></div>
 
                     <div id="feedbackdetails" style={{display:'none'}}>
-                <button onClick={back} style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold',margin:'-300px 0 0 0'}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
+                <button onClick={back} style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold',bottom:'-50px',position:'relative',marginLeft:'170px',padding:'10px',borderRadius:'0 10px 0 10px'}}><Link to={'/users'} style={{color:"white",textDecoration:"none",}}>Back</Link></button> &nbsp;
                     <caption align="center" style={{ fontWeight: 'bold', fontSize: '20px', color: 'white', borderRadius: '0 10px 0 10px', background: 'grey', margin: '5px' }} >Feedback_Details</caption>
                     <table id="data-table3" class="table table-bordered" style={{ borderColor: 'white', background: 'rgba(0, 0, 0,0.2)' }}>
 

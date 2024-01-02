@@ -20,7 +20,7 @@
   input[type="text"],
   textarea {
     width: 100%;
-    padding: 8px;
+  
     margin-bottom: 10px;
     box-sizing: border-box;
     border: 1px solid #ddd;
@@ -28,7 +28,7 @@
   }
   
   button {
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     border: 1px solid #333;
     background-color: rgb(42, 166, 42);
     color: #fff;

@@ -148,5 +148,10 @@ th, td {
   font-weight: 500;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.studentlist a{
+display: grid;
+place-items: center;
+margin-top: 20px;
+}
 
 /* ... Your existing styles */

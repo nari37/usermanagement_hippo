@@ -23,7 +23,7 @@ export default function Update() {
 //    ......................
 const [tutordata, settutorData] = useState('');
 const [tutorid,setTouid] = useState('');
-
+const [remain,setremmaning] = useState('');
      
     const handler = (e) => {
 
@@ -33,8 +33,7 @@ const [tutorid,setTouid] = useState('');
             ({ ...prevState, [name]: value }));
 
     }
-
-    
+   
     
     const discount = () => {
         let actual = document.getElementById('actual').value;
@@ -48,13 +47,32 @@ const [tutorid,setTouid] = useState('');
         document.getElementById('diff').value = diff; 
         
         dis =(diff/actual)*100;
-
         document.getElementById('discount').value = dis;
 
     }
+     
+    const balance = () => {
+  const total = parseFloat(data.total) || 0;
+  const paid = parseFloat(data.paid) || 0;
+
+  if ( total < 0 || paid < 0) {
+    console.error("Total and Paid amounts should be valid positive numbers.");
+    return;
+  }
+
+  // Calculate remaining balance
+  let remainingBalance = total - paid;
+
+  // Ensure remaining balance is not negative
+  remainingBalance = Math.max(remainingBalance, 0);
+
+  // Update the 'remainbalance' field using React state
+ document.getElementById('remainbalance').value = remainingBalance;
+};
 
     
 
+    
     React.useEffect(() => {
         axios.get(`http://localhost:5000/singleuser/${id}`).then((res) => {
             console.log({ id });
@@ -83,8 +101,9 @@ const [tutorid,setTouid] = useState('');
 
 
     const update = (id,tutorid) => {
+       
         const userdetails = { firstname: data.firstname, email: data.email, password: data.password,course: data.course,content: data.content,actual:data.actual,total: data.total,discount:data.discount,paid: data.paid,remaining: data.remaining,start:data.start,end:data.end,project:data.project, roletype: data.roletype, assigned_to: data.assigned_to, status: data.status, fee_detail: data.fee_detail}
-
+           console.log(userdetails) 
         axios.post(`http://localhost:5000/updateuser/${id}`, userdetails)
         .then((res) => {
             console.log(res.data);
@@ -109,7 +128,7 @@ const [tutorid,setTouid] = useState('');
             }
 
         })
-        axios.post('localhost:5000/')
+        
 
        
 
@@ -154,7 +173,7 @@ const [tutorid,setTouid] = useState('');
 
                                             <div>
                                                 <label className="form-label" htmlFor="form3Example1cg" style={{ fontWeight: 'bold',fontSize:'18px' }}>Email</label>
-                                                <input name="email" type="email" id="form3Example3cg" className="form-control form-control-lg" value={data.email} onChange={handler} readOnly />
+                                                <input name="email" type="email" id="form3Example3cg" className="form-control form-control-lg" value={data.email} onChange={handler}  />
                                             </div>
 
                                             <div className="form-outline mb-4">
@@ -170,6 +189,8 @@ const [tutorid,setTouid] = useState('');
                                                 <select name='course' onChange={handler} id='select' style={{  fontSize:'18px'}  } >
                                                     <option >Select</option>
                                                     <option>Full Stack</option>
+                                                    <option>Digital_Marketing</option>
+                                                    <option>Tally</option>
                                                     <option >Devops</option>
                                                     <option >Testing</option>
                                                     <option >Sales Force</option>
@@ -182,10 +203,12 @@ const [tutorid,setTouid] = useState('');
                                                 <select name='content' onChange={handler} id='content' style={{  fontSize:'18px'}  }  >
                                                     <option >Select</option>
                                                     
-                                                    <option>Programming language,OS concept ,Linux,Cloud Computing</option>
-                                                    <option >HTML,CSS,J.S,REACT,NODE</option>
-                                                    <option >Java oops Concept,Selenium,Cucumber</option>
-                                                    <option >SalesForce Admin,SalesForce Development</option>
+                                                    <option>Programming language,OS concept ,Linux,Cloud Computing,..</option>
+                                                    <option >HTML,CSS,J.S,REACT,NODE,..</option>
+                                                    <option>SEO,SMM,Social Miedia Marketing,..</option>
+                                                    <option>GST,EWay_bill,Vouchers,..</option>    
+                                                    <option >Java oops Concept,Selenium,Cucumber,..</option>
+                                                    <option >SalesForce Admin,SalesForce Development,..</option>
                                                 </select>
                                             </div>&emsp;
                                             
@@ -213,11 +236,11 @@ const [tutorid,setTouid] = useState('');
                                                 <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }} >Fee Structure:</label>&nbsp;
                                                 <div>
                                                     <label style={{ margin: '15px 0 0 -35px ', fontWeight: 'bold' }}>Actual</label>
-                                                    <input type='text' id='actual' name='actual' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} />&nbsp;
+                                                    <input type='text' id='actual' name='actual' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} value={data.Actual} />&nbsp;
                                                 </div>
                                                 <div>
-                                                    <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }}>Total</label>
-                                                    <input type='text' id='total' name='total' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} onKeyUp={discount}/>&nbsp;
+                                                    <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }} >Total</label>
+                                                    <input type='text' id='total' name='total' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} onKeyUp={discount} value={data.total}/>&nbsp;
                                                 </div>
                                                 <div style={{display:'none'}}>
                                                     <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }}>Difference</label>
@@ -229,17 +252,11 @@ const [tutorid,setTouid] = useState('');
                                                 </div>
                                                 <div>
                                                     <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }}>Paid</label>
-                                                    <input type='text' id='paid' name='paid' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} />&nbsp;
+                                                    <input type='text' id='paid' name='paid' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} value={data.paid} onKeyUp={balance}  />&nbsp;
                                                 </div>
                                                 <div>
                                                     <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }}>Remaining</label>
-                                                    <input type='text' id='remaining' name='remaining' style={{ margin: '-40px 0 0 10px', borderRadius: '2%', outline: 'none'  }} size={10}   onChange={handler}/>&nbsp;
-                                                </div>
-                                                
-                                            
-
-
-
+                                                    <input type='text' id='remainbalance' name='remaining' style={{ margin: '-40px 0 0 10px', borderRadius: '2%', outline: 'none'  }} size={10}   onChange={handler}   readOnly/>&nbsp;                                    </div>                    
 
                                         </div><br/>
                                         <div style={{ display: 'flex', gap: "50px" }}>

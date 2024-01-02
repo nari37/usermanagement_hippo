@@ -29,7 +29,7 @@ export default function Finance(){
         <>
         <section>
         <div id="users" style={{margin:'50px 0 0 0'}}>
-                    <button id="tutor" style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold'}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
+                    <button id="tutor" style={{borderRadius:'10px',backgroundColor:"rgba(37, 117, 252, 1)",fontWeight:'bold',bottom:'-50px',position:'relative',marginLeft:'200px',padding:'10px',borderRadius:'0 10px 0 10px'}}><Link to={'/users'} style={{color:"white",textDecoration:"none"}}>Back</Link></button> &nbsp;
                    
                    </div>
         <div >

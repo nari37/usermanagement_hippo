@@ -48,7 +48,17 @@ export default function Courses(){
             setData({ course: res.data[0].course, content: res.data[0].content, date: res.data[0].date,task_staus: res.data[0].task_staus,test: res.data[0].test })
         }
         )
-
+        axios.get(`http://localhost:5000/tally/${content}`).then((res) => {
+            
+        setData({ course: res.data[0].course, content: res.data[0].content, date: res.data[0].date,task_staus: res.data[0].task_staus,test: res.data[0].test })
+    }
+    )
+    axios.get(`http://localhost:5000/marketing/${content}`).then((res) => {
+            
+    setData({ course: res.data[0].course, content: res.data[0].content, date: res.data[0].date,task_staus: res.data[0].task_staus,test: res.data[0].test })
+}
+)
+   
     }, [content])
 
     const Contentupdate=()=>{
@@ -100,6 +110,58 @@ export default function Courses(){
             } else if(data.course === "Devops"){
 
                 axios.post(`http://localhost:5000/devopsupdate/${content}`, coursedetails).then((res) => {
+                    console.log(res.data);
+                    if (res !== '') {
+                        alert('Testing details  updated successfully!!!!');
+                        console.log({ id });
+                        
+                      
+                        data.course = '';
+        
+                        data.content = '';
+                        data.date = '';
+                        data.task_status = '';
+        
+                        data.test = '';
+        
+                        Nav(-1);
+                        
+                        
+                    }
+        
+                })
+        
+                
+        
+               }else if(data.course === "Tally"){
+
+                axios.post(`http://localhost:5000/tallyupdate/${content}`, coursedetails).then((res) => {
+                    console.log(res.data);
+                    if (res !== '') {
+                        alert('Testing details  updated successfully!!!!');
+                        console.log({ id });
+                        
+                      
+                        data.course = '';
+        
+                        data.content = '';
+                        data.date = '';
+                        data.task_status = '';
+        
+                        data.test = '';
+        
+                        Nav(-1);
+                        
+                        
+                    }
+        
+                })
+        
+                
+        
+               }else if(data.course === "Digital_Marketing"){
+
+                axios.post(`http://localhost:5000/marketingupdate/${content}`, coursedetails).then((res) => {
                     console.log(res.data);
                     if (res !== '') {
                         alert('Testing details  updated successfully!!!!');
