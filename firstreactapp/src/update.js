@@ -18,7 +18,25 @@ export default function Update() {
     const { id } = useParam;
     const { roletype } = useParam;
 
-    const [data, setData] = useState({ firstname: '', email: '', password: '', roletype: '' });
+    const [data, setData] =useState({
+        firstname: '',
+        email: '',
+        password: '',
+        roletype: '',
+        course: '',
+        content: '',
+        start: '',
+        end: '',
+        assigned_to: '',
+        total: '',
+        actual: '',
+        discount: '',
+        paid: '',
+        remaining: '',
+        project: '',
+        status: '',
+        fee_detail: '',
+      });
     const [tutorname, setName] = useState([]);
 //    ......................
 const [tutordata, settutorData] = useState('');
@@ -73,15 +91,28 @@ const [remain,setremmaning] = useState('');
     
 
     
-    React.useEffect(() => {
-        axios.get(`http://localhost:5000/singleuser/${id}`).then((res) => {
-            console.log({ id });
-            
-            setData({ firstname: res.data[0].firstname, email: res.data[0].email, password: res.data[0].password,course: res.data[0].course,content: res.data[0].content, roletype: res.data[0].roletype, phone_number: res.data[0].phone_number, assigned_to: res.data[0].assigned_to, status: res.data[0].status,total: res.data[0].total,paid: res.data[0].paid,remaining: res.data[0].remaining,start:res.data[0].start,end:res.data[0].end,project:res.data[0].project  })
-        }
-        
-        )
-    }, [id])
+useEffect(() => {
+    axios.get(`http://localhost:5000/singleuser/${id}`).then((res) => {
+      const userData = res.data[0];
+      setData({
+        ...userData,
+        roletype: userData.roletype || '',
+        course: userData.course || '',
+        content: userData.content || '',
+        start: userData.start || '',
+        end: userData.end || '',
+        assigned_to: userData.assigned_to || '',
+        total: userData.total || '',
+        actual: userData.actual || '',
+        discount: userData.discount || '',
+        paid: userData.paid || '',
+        remaining: userData.remaining || '',
+        project: userData.project || '',
+        status: userData.status || '',
+        fee_detail: userData.fee_detail || '',
+      });
+    });
+  }, [id]);
 
     
   
