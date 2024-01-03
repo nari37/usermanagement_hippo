@@ -207,6 +207,7 @@ export default function Student() {
      const [progress, setProgress] = useState(0);
      const [file,setFile] = useState(null);
      const [tutorreview,settutorreview] = useState('');
+     
 
 
 
@@ -219,21 +220,7 @@ export default function Student() {
 
 
 
-    // useEffect(() => {
-    //     axios.get('http://localhost:5000/tuto').then((res) => {
-
-    //         setTutor(res.data)
-
-
-    //         // Fetch tasks and progress (adjust the API calls based on your backend)
-    //     axios.get(`http://localhost:5000/tasks/${id}`).then((res) => {
-    //         setTasks(res.data);
-    //     });
-
-    //     // Set progress based on your backend data
-    //     setProgress(/* Set progress from your backend */);
-    //      })
-    //  }, [])
+  
 
     const feeddetails = () => {
         const feedbackinfo = { firstname: data.firstname, email: data.email, feedback: data.feedback }
@@ -348,53 +335,97 @@ const handleFileChange = (e)=>{
   return (
     <div className="student-table" style={{marginTop:'50px'}}>
          <button className="btn btn-outline-dark  btn-lg px-2" type="submit" onClick={Feedback}style={{float:'right'}}>Feed Back</button>
-      <table className="horizontal-table" >
-        
-        <thead>
-          <tr >
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Course Type</th>
-            <th>Content</th>
-            <th>Starting Date</th>
-            <th>Ending Date</th>
-            <th>Total Fee</th>
-            <th>Pending Fee</th>
-            <th>Remaining Fee</th>
-            <th>Project/Internship</th>
-            <th>Role</th>
-            <th>Assigned To</th>
-            <th>Status</th>
-            <th>Fee Details</th>
-            <th>Fee Payment</th>
-          </tr>
-        </thead>
-        <tbody>
-            {studentinfo.map(item=>
-            <> 
+         <table className="horizontal-table">
+      <tbody>
+        {studentinfo.map((item, index) => (
+          <>
             <tr>
-            <td>{item.id}</td>
-            <td>{item.firstname}</td>
-            <td>{item.email}</td>
-            <td>{item.course}</td>
-            <td>{item.content}</td>
-            <td>{item.start}</td>
-            <td>{item.end}</td>
-            <td>{item.total}</td>
-            <td>{item.paid}</td>
-            <td>{item.remaining}</td>
-            <td>{item.project}</td>
-            <td>{item.roletype}</td>
-           
-            <td value={tutorinfo.firstname}>{item.assigned_to}</td>
-            <td>{item.status}</td>
-            <td>{item.fee_detail}</td>
-            <td><Link to={`/payment/${id}`} style={{ textDecoration: 'none' }}>Pay</Link></td>
-          </tr></>)}
-         
-        </tbody>
-      </table>
+              <th>ID</th>
+              <td>{item.id}</td>
+            </tr>
+
+            <tr>
+              <th>Name</th>
+              <td>{item.firstname}</td>
+            </tr>
+
+            <tr>
+              <th>Email</th>
+              <td>{item.email}</td>
+            </tr>
+
+            <tr>
+              <th>Course Type</th>
+              <td>{item.course}</td>
+            </tr>
+
+            <tr>
+              <th>Content</th>
+              <td>{item.content}</td>
+            </tr>
+
+            <tr>
+              <th>Starting Date</th>
+              <td>{item.start}</td>
+            </tr>
+
+            <tr>
+              <th>Ending Date</th>
+              <td>{item.end}</td>
+            </tr>
+
+            <tr>
+              <th>Total Fee</th>
+              <td>{item.total}</td>
+            </tr>
+
+            <tr>
+              <th>Pending Fee</th>
+              <td>{item.paid}</td>
+            </tr>
+
+            <tr>
+              <th>Remaining Fee</th>
+              <td>{item.remaining}</td>
+            </tr>
+
+            <tr>
+              <th>Project/Internship</th>
+              <td>{item.project}</td>
+            </tr>
+
+            <tr>
+              <th>Role</th>
+              <td>{item.roletype}</td>
+            </tr>
+
+            <tr>
+              <th>Assigned To</th>
+              <td value={tutorinfo.firstname}>{item.assigned_to}</td>
+            </tr>
+
+            <tr>
+              <th>Status</th>
+              <td>{item.status}</td>
+            </tr>
+
+            <tr>
+              <th>Fee Details</th>
+              <td>{item.fee_detail}</td>
+            </tr>
+
+            <tr>
+              <th>Fee Payment</th>
+              <td>
+                <Link to={`/payment/${id}`} style={{ textDecoration: 'none' }}>
+                  Pay
+                </Link>
+              </td>
+            </tr>
+          </>
+        ))}
+      </tbody>
+    </table>
       <div id="feed" style={{ display: 'none' }}>
      
          <form className="table table-bordered" key={val} style={{margin:'2rem auto'}} >

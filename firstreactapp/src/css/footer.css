@@ -1,4 +1,4 @@
-.footer{
+/* .footer{
   background-color: rgb(48, 45, 45);
   max-width: 100%;
   padding: 20px;
@@ -57,4 +57,65 @@
 .about a:hover{
     transition: 0.6s;
     transform: translateX(10px);
+} */
+
+.gri{
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: repeat(auto-fit,
+    minmax(min(11.25rem,100%),1fr));
+    grid-gap: 1rem;
+}
+.ser a{
+    text-decoration: none;
+    color: whitesmoke;
+   
+}
+.ser a:hover{
+    color: aqua;
+    transition: 0.6s;
+    transform: translateX(20px);
+   
+}
+.hac a:hover{
+    color: aqua;
+    transition: 0.6s;
+    transform: translateX(20px);
+   
+}
+.socail a i:hover{
+    color: aqua;
+}
+.hac ul{
+    display:flex;
+    gap: 100px;
+    justify-content: center;
+    list-style: none;
+ 
+}
+
+@media (max-width:768px) {
+    .fin img{
+        width: 250px;
+    }
+    
+}
+@media (max-width:820px) {
+    .fin img{
+        width: 240px;
+    }
+}
+@media (max-width:475px) {
+    .hac ul{
+        display: flex;
+        gap:60px;
+
+      }
+}
+@media (max-width:388px) {
+    .hac ul{
+        display: flex;
+        gap:25px;
+
+      }
 }

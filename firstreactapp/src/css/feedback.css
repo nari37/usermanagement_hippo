@@ -144,3 +144,28 @@
         width: 100%;
     }
 }
+
+
+.table-container {
+    overflow-x: auto;
+  }
+  
+  .horizontal-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .horizontal-table th,
+  .horizontal-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  @media (max-width: 600px) {
+    .horizontal-table th,
+    .horizontal-table td {
+      font-size: 12px;
+    }
+  }
+  

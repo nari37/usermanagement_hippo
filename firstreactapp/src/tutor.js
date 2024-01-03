@@ -332,56 +332,59 @@ const viewtask = async (studentid) => {
         <div>
         
         <caption align="center" style={{fontWeight:'bold' ,fontSize:'20px',color:'white',borderRadius:'0 10px 0 10px',background:'grey',margin:'5px',marginTop:'40px'}} >Trainer</caption>
-                <table className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)'}} >
-                    <thead>
-                        <tr align="center" >
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            {/* <th scope="col">Last Name</th> */}
-                            <th scope="col">Email</th>
-                            {/* <th scope="col">Password</th> */}
-                            <th scope="col">Role</th>
-                            <th scope="col">Course</th>
-                            <th scope="col">Start_time</th>
-                            <th scope="col">End_time</th>
-                            <th scope="col">Action</th>
-                            {/* <th scope="col">Phone Number</th> */}
-                            {/* <th scope="col">Assigned For</th> */}
-                           
-                           
-                        </tr>
-                    </thead>
-                    <tbody align="center" style={{color:'black',background: 'rgba(255, 255, 255,0.2)',fontSize:'20px',fontFamily:'bahnschrift condensed'}}>
-                       
-                        {tutorinfo && tutorinfo.map((item,id) =>
-                            <>
-                              <tr key={id} >
-                                    <th scope="row">{item.id}</th>
-                                    <td>{item.firstname}</td>
-                                    {/* <td>{item.lastname}</td> */}
-                                    <td>{item.email}</td>
-                                    {/* <td>{item.password}</td> */}
-                                    <td>{item.roletype}</td>
-                                    <td>{item.course}</td>
-                                    <td>{item.start_time}</td>
-                                    <td>{item.end_time}</td>
-                                    <td>
-                                        <button  name="activetask" className="btn btn-outline-primary" onClick={task}>Task</button>
-                                    </td>
-                                    {/* <td>{item.phone_number}</td> */}
-                                    {/* <td>{studentinfo.filter(item=> val===item.id)}</td> */}
-                                    {/* <td><button type="button" className="btn btn-outline-danger" onClick={()=>del(item.id)} >Delete</button></td>  */}
-                                    
-                                </tr>
+               
+        <table className="horizontal-table" style={{marginLeft:'10px'}}>
+      <tbody>
+        {tutorinfo.map((item, index) => (
+          <>
+            <tr>
+              <th>ID</th>
+              <td>{item.id}</td>
+            </tr>
 
-                            </>
-                        
-                        )}
-                    </tbody>
+            <tr>
+              <th>Name</th>
+              <td>{item.firstname}</td>
+            </tr>
 
-                   </table>
+            <tr>
+              <th>Email</th>
+              <td>{item.email}</td>
+            </tr>
+            <tr>
+              <th>Role</th>
+              <td>{item.roletype}</td>
+            </tr>
+
+            <tr>
+              <th>Course </th>
+              <td>{item.course}</td>
+            </tr>
+
+            <tr>
+              <th>Start_time</th>
+              <td>{item.start_time}</td>
+            </tr>
+
+            <tr>
+              <th>End_time </th>
+              <td>{item.end_time}</td>
+            </tr>
+
+            <tr>
+              <th>Action</th>
+              <td>
+                 <button  name="activetask" className="btn btn-outline-primary" onClick={task}>Task</button>
+             </td>
+            </tr>
+            
+           
+          </>
+        ))}
+      </tbody>
+    </table>
                  
-                   <table id="taskdetails" className="table table-bordered" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)',borderRadius:'5px',display:'none',maxWidth:'70%', margin:'10px auto'}} >
+                   <table id="taskdetails" className="horizontal-table" style={{borderColor:'white',background: 'rgba(0, 0, 0,0.2)',borderRadius:'5px',display:'none',maxWidth:'70%', margin:'10px auto'}} >
                     <thead>
                         <tr >
                             
@@ -446,12 +449,12 @@ const viewtask = async (studentid) => {
 
                    </table>
                  
-                   <center><button className="btn btn-primary " id="getlist" onClick={()=>getstudentlists(id)} >Show list of Students</button></center>
+                   <center><button className="btn btn-primary " id="getlist" style={{marginBottom:'20px'}} onClick={()=>getstudentlists(id)} >Show list of Students</button></center>
                                          
     </div> 
       {/* student list...table  */}
-         <div className="studentlist" id="toggled" style={{display:'none',margin:'10px auto' }} >
-                <table  style={{maxWidth:'70%'}} >
+         <div className="studentlist" id="toggled" style={{display:'none',margin:'10px auto', }} >
+                <table  style={{maxWidth:'70%',marginLeft:'10px'}} className="horizontal-table" >
                    
                         <tr style={{ background:'green', color:'white',}} id='tb'>
                             <th colSpan='25'>ID</th>

@@ -145,7 +145,7 @@ export default function Users() {
 
                         
                         
-                <div id="layout" style={{ display: "grid",gridTemplateColumns:'auto auto auto ', gap: "30px", boxShadow: "2px 8px 32px 2px gray", margin: "50px 0 0 150px", borderRadius: '10px', width: '850px',height:'500px'}}>
+                <div id="layout" >
                     
                         <div className="tiles"  onMouseOver={updateEntryCount} >
                         <Link to='/stu' style={{ textDecoration: 'none' }}>
@@ -171,14 +171,14 @@ export default function Users() {
                             <h1 align="center" style={{color:'black'}}><span style={{fontSize:'32px'}}>&#8377;</span></h1>        
                         </Link>
                         </div>
-                        <div className="tiles"  onClick={contact} onMouseOver={updateEntryCount2} style={{margin:'-20px 0 0 40px'}} >
+                        <div className="tiles"  onClick={contact} onMouseOver={updateEntryCount2}  >
                     <Link to='/users' style={{ textDecoration: 'none' }}  >
                             <h1 align="center" style={{background:'grey',color:'white',borderRadius:'8px 8px 10px 10px'}}>Contact</h1>
                             <h3 align="center" style={{color:'grey'}}>Total Entries:</h3>
                             <h2 align="center" style={{color:'black'}}><span id="entries-count2"></span></h2>
                             </Link>
                         </div>
-                        <div className="tiles"  onClick={feed} onMouseOver={updateEntryCount3} style={{margin:'-20px 0 0 40px'}} >
+                        <div className="tiles"  onClick={feed} onMouseOver={updateEntryCount3}  >
                     <Link to='/users' style={{ textDecoration: 'none' }}>
                             <h1 align="center" style={{background:'grey',color:'white',borderRadius:'8px 8px 10px 10px'}}>Feedback</h1>
                             <h3 align="center" style={{color:'grey'}}>Total Entries:</h3>

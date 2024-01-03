@@ -78,6 +78,7 @@ return (
        <div className='imagehippo'> <img data-aos="fade-up" src='https://pbs.twimg.com/media/ECeQfWWVUAAKRl8?format=png&name=small' alt=''/></div> 
     </div>
 {/*  */}
+<section id='wh'>
     <div   className='whychoose'>
        <center>
         <h2  data-aos="fade-up">Why choose <span>Us</span></h2>
@@ -87,7 +88,9 @@ return (
         <div className='pera' data-aos="fade-up"><center><span data-aos="fade-up">Why choose <span id='hip' data-aos="fade-up">HippoCloud?</span></span></center><p data-aos="fade-up">HippoCloud is the first software develepment IT company at <b>Vishakhapatnam</b> location. Over develepment team deals multy a   </p></div> 
        </div>
     </div>
+    </section>
     {/*  */}
+    <section id='our'>
      <div className='overservices' data-aos="fade-up">
         <center>
           <h2 data-aos="fade-up">Our <span>Services</span></h2>  
@@ -127,6 +130,7 @@ return (
         </div>
         
      </div>
+     </section>
      {/*  */}
      <div className='studentrivews'>
         <center><h2 data-aos="fade-up">Students's <span>Reviwes</span></h2></center>
