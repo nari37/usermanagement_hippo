@@ -15,20 +15,20 @@ useEffect(()=>{
           <div className='flex'>
             <div className='social' data-aos="fade-up">
               <h2 data-aos="fade-up">Our Socialmedia links :</h2>
-              <img src='http://localhost:3000/logo-removebg-preview.png' alt="img"  />
+              <img src='logo-removebg-preview.png' alt="img"  />
               <ul>
               <li>
-          <a href="https://www.facebook.com/" className='icon'>
+          <a href="https://www.facebook.com/">
             <i className="fab fa-facebook"></i>
           </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/" className='icon'> 
+          <a href="https://www.instagram.com/"> 
             <i className="fab fa-instagram"></i>
           </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/" className='icon'>
+          <a href="https://www.linkedin.com/" >
             <i className="fab fa-linkedin"></i>
           </a>
         </li>
@@ -37,9 +37,9 @@ useEffect(()=>{
             <div className='about' data-aos="fade-up">
               <h2>About :</h2>
               <ul>
-                <a className='tran'>Home</a>
-                <a className='tran'>About us</a>
-                <a className='tran'>Services</a>
+                <a href='.' >Home</a>
+                <a >About us</a>
+                <a href=''>Services</a>
 
               </ul>
             </div>

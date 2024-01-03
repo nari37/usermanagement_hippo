@@ -85,13 +85,13 @@ export default function Menu() {
             <label for="check">
 
                 
-                <img id="btn1" src="menu.png" alt="" height="40px" width="40px" style={{ margin: '50px 0 0 0', position: 'fixed' }} ></img>
+                <img id="btn1" src="menu.png" alt="#" height="40px" width="40px" style={{ margin: '50px 0 0 0', position: 'fixed' }} ></img>
                 <i class="bi bi-x-lg" id="canc" style={{ margin: '50px 0 0 0', position: 'fixed' }}></i>
             </label>
             <div className='slidebar'>
 
                 <header>
-                    <img src="user.jpg" alt="" height="80px" width="80px" style={{ borderRadius: '50%', marginBottom: '-20px', marginLeft: '20px' }}></img><br />
+                    <img src="user.jpg" alt="#" height="80px" width="80px" style={{ borderRadius: '50%', marginBottom: '-20px', marginLeft: '20px' }}></img><br />
                     {localStorage.getItem('username') !== null ? <h5 id="greets" style={{margin:'20px 0 0 -160px',fontSize:'18px'}}>Welcome {localStorage.getItem('username')} </h5> : ''}
                 </header>
                 <ul>

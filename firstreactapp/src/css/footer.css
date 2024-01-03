@@ -54,12 +54,7 @@
     flex-direction: column;
 }
 
-.about .tran:hover{
+.about a:hover{
     transition: 0.6s;
     transform: translateX(10px);
-}
-@media (max-width:'791px') {
-    .flex{
-      
-    }
 }

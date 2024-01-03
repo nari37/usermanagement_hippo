@@ -266,8 +266,8 @@ export default function Tutor(){
         formData.append('file', file);
         formData.append('time', selectedTime);
         formData.append('discription', discript);
-
-        
+       
+        console.log(formData)
          
         axios.post(`http://localhost:5000/taskpost/${id}`, formData)
           .then((res) => console.log(res))
