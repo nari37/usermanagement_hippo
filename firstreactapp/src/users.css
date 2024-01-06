@@ -1,11 +1,36 @@
-#layout{
+ #layout{
     display: grid;
     padding: 1rem;
-    grid-template-columns: repeat(auto-fit,
-    minmax(min(11.25rem,100%),1fr));
-    grid-gap: 2rem;
-    margin-top: 30px;
+    grid-template-columns: repeat(3, minmax(min(11.25rem, 100%), 1fr));
+    grid-template-rows: repeat(2, auto); /* Set the number of rows to 2 */
+    grid-gap: 1rem;
+    margin-top: 60px;
+}  
+@media (max-width:650px) {
+    #layout{
+        display: grid;
+        padding: 1rem;
+       
+        grid-template-columns: repeat(auto-fit,
+        minmax(min(11.25rem,100%),1fr));
+        grid-gap: 1rem;
+        margin-top: 60px;
+    }  
 }
+
+@media (max-width:490px) {
+    #layout{
+        display: grid;
+        padding: 1rem;
+       
+        grid-template-columns: repeat(auto-fit,
+        minmax(min(11.25rem,100%),1fr));
+        grid-gap: 1rem;
+        margin-top: 60px;
+    }  
+}
+
+
 
 .tutor{
     border-Radius:'10px';

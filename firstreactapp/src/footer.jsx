@@ -108,7 +108,7 @@ export default function Footer() {
 <h1>Follow Us On :</h1>
 
 <div style={{display:'flex',gap:'1rem',marginTop:'10px'}} className='socail'>
-            <a href='#web'target='blank' style={{fontSize:'25px',color:'whitesmoke'}}><i class="bi bi-facebook"></i></a>&emsp;
+            <a href='https://www.facebook.com/hippocloud/'target='blank' style={{fontSize:'25px',color:'whitesmoke'}}><i class="bi bi-facebook"></i></a>&emsp;
             <a href='https://www.instagram.com/hippocloud.vizag/' target='blank' style={{fontSize:'25px',color:'whitesmoke',}}><i class="bi bi-instagram"></i></a>&emsp;
             <a href='https://www.twitter.com/hippocloud1/' target='blank' style={{fontSize:'25px',color:'whitesmoke'}}><i class="bi bi-twitter"></i></a>&nbsp;      
    </div>   

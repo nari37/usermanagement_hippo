@@ -161,8 +161,8 @@ export default function TutorData(){
                             {/* <th scope="col">Password</th> */}
                             <th scope="col">Role</th>
                             <th scope="col">Course</th>
-                            <th scope="col">Start_time</th>
-                            <th scope="col">End_time</th>
+                            {/* <th scope="col">Start_time</th>
+                            <th scope="col">End_time</th> */}
                             <th scope="col">Status</th>
                             {/* <th scope="col">Phone Number</th> */}
                             {/* <th scope="col">Assigned For</th> */}
@@ -182,8 +182,8 @@ export default function TutorData(){
                                     {/* <td>{item.password}</td> */}
                                     <td>{item.roletype}</td>
                                     <td>{item.course}</td>
-                                    <td>{item.start_time}</td>
-                                    <td>{item.end_time}</td>
+                                    {/* <td>{item.start_time}</td>
+                                    <td>{item.end_time}</td> */}
                                     <td>{item.status}</td>
                                     {/* <td>{item.phone_number}</td> */}
                                     {/* <td>{studentinfo.filter(item=> val===item.id)}</td> */}

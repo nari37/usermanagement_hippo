@@ -343,80 +343,168 @@ import './login.css';
 export default function Login() {
     const Nav = useNavigate();
     const [data, setData] = useState({ email: '', password: '' });
+    const [loginfaild, setloginfaild] = useState('')
 
     const handler = (e) => {
         const { name, value } = e.target;
         setData((prevState) => ({ ...prevState, [name]: value }));
     }
 
-    const handleLoginSuccess = (res) => {
-        setData({ email: '', password: '' });
+    // const handleLoginSuccess = (res) => {
+    //     setData({ email: '', password: '' });
 
-        if (res.data[0].roletype === 'Admin') {
-            alert('Logged in successfully as Admin');
-            Nav('/users');
-        } else if (res.data[0].roletype === 'Tutor') {
-            alert('Logged in successfully as Tutor');
-            Nav(`/tutor/${res.data[0].id}/${res.data[0].course}`);
-        } else if (res.data[0].roletype === 'Student') {
-            alert('Logged in successfully as Student');
-            Nav(`/student/${res.data[0].id}`);
-        } else {
-            alert('Unknown role');
-        }
-    }
+    //     if (res.data[0].roletype === 'Admin') {
+    //         alert('Logged in successfully as Admin');
+    //         Nav('/users');
+    //     } else if (res.data[0].roletype === 'Tutor') {
+    //         alert('Logged in successfully as Tutor');
+    //         Nav(`/tutor/${res.data[0].id}/${res.data[0].course}`);
+    //     } else if (res.data[0].roletype === 'Student') {
+    //         alert('Logged in successfully as Student');
+    //         Nav(`/student/${res.data[0].id}`);
+    //     } else {
+    //         alert('Unknown role');
+    //     }
+    // }
 
-    const login = () => {
-        if (!data.email || !data.password) {
-            alert('Please fill in all the fields.');
-            return;
-        }
+    // const login = () => {
+    //     if (!data.email || !data.password) {
+    //         alert('Please fill in all the fields.');
+    //     }
 
-        const userdetails = { email: data.email, password: data.password };
+    //     const userdetails = { email: data.email, password: data.password };
 
-        axios.post('http://localhost:5000/login', userdetails)
-            .then((res) => {
-                handleLoginSuccess(res);
-                localStorage.setItem('username', res.data[0].firstname);
-                 console.log('loginres', res.data[0].firstname)
-                localStorage.setItem('roletype', res.data[0].roletype);
-            })
-            .catch((err) => {
-                console.error('Login Error:', err);
+    //     axios.post('http://localhost:5000/login', userdetails)
+    //         .then((res) => {
+    //             handleLoginSuccess(res);
+    //             localStorage.setItem('username', res.data[0].firstname);
+    //              console.log('loginres', res.data[0].firstname)
+    //             localStorage.setItem('roletype', res.data[0].roletype);
                
-            });
+    //         })
+    //         .catch((err) => {
+    //             console.error('Login Error:', err);
+    //             setloginfaild(err)
+    //             setData('')
+    //         });
             
           
 
-        axios.post('http://localhost:5000/tutorlogin', userdetails)
-            .then((res) => {
-                handleLoginSuccess(res)
+    //     axios.post('http://localhost:5000/tutorlogin', userdetails)
+    //         .then((res) => {
+    //             handleLoginSuccess(res)
 
-                console.log('loginres', res.data[0].firstname);
+    //             console.log('loginres', res.data[0].firstname);
 
-                localStorage.setItem('username', res.data[0].firstname);
-                localStorage.setItem('roletype', res.data[0].roletype);
-            })
-            .catch((err) => {
-                console.error('Tutor Login Error:', err);
-                // Handle tutor login error if needed
-            });
-
-        axios.post('http://localhost:5000/studentlogin', userdetails)
-            .then((res) => {
-                handleLoginSuccess(res)
-                console.log('loginres', res.data[0].firstname);
-
-                  localStorage.setItem('username', res.data[0].firstname);
-                  localStorage.setItem('roletype', res.data[0].roletype);
-                  localStorage.setItem('id', res.data[0].id);
+    //             localStorage.setItem('username', res.data[0].firstname);
+    //             localStorage.setItem('roletype', res.data[0].roletype);
                 
-            })
-            .catch((err) => {
-                console.error('Student Login Error:', err);
-                // Handle student login error if needed
-            });
+    //         })
+    //         .catch((err) => {
+    //             console.error('Tutor Login Error:', err);
+    //             // Handle tutor login error if needed
+    //             setloginfaild(err);
+    //             setData('')
+               
+    //         });
+
+    //     axios.post('http://localhost:5000/studentlogin', userdetails)
+    //         .then((res) => {
+    //             handleLoginSuccess(res)
+    //             console.log('loginres', res.data[0].firstname);
+
+    //               localStorage.setItem('username', res.data[0].firstname);
+    //               localStorage.setItem('roletype', res.data[0].roletype);
+    //               localStorage.setItem('id', res.data[0].id);
+                  
+    //         })
+    //         .catch((err) => {
+    //             console.error('Student Login Error:', err);
+    //             // Handle student login error if needed
+    //             setloginfaild(err);
+    //             setData('')
+                
+    //         });
+           
+    // }
+    const login = () => {
+        if (!data.email || !data.password) {
+                    alert('Please fill in all the fields.');
+                    return
+           }
+
+        const userdetails = { email: data.email, password: data.password }
+        axios.post('http://localhost:5000/login', userdetails)
+        .then((res) => {
+            console.log('loginres', res.data[0].firstname);
+
+            localStorage.setItem('username', res.data[0].firstname);
+            localStorage.setItem('roletype', res.data[0].roletype);
+
+            if (res !== '') {
+                data.email = '';
+                data.password = '';
+                data.roletype = '';
+                alert('logged in successfully');
+                if (res.data[0].roletype === 'Admin') {
+                   Nav('/users');
+                }          
+            }
+
+        }).catch(err=>{
+            setloginfaild(err)
+        })
+
+        axios.post('http://localhost:5000/tutorlogin', userdetails)
+        .then((res) => {
+            console.log('loginres', res.data[0].firstname);
+
+            localStorage.setItem('username', res.data[0].firstname);
+            localStorage.setItem('roletype', res.data[0].roletype);
+
+            if (res.data[0].roletype === 'Tutor') {
+                data.email = '';
+                data.password = '';
+                data.roletype = '';
+                alert('logged in successfully from Tutor Table');
+                if (res.data[0].roletype === 'Tutor') {
+                    Nav(`/tutor/${res.data[0].id}/${res.data[0].course}`);
+                }
+                
+            }
+
+        }).catch(err=>{
+            setloginfaild(err)
+        })
+            
+        axios.post(`http://localhost:5000/studentlogin`, userdetails)
+        .then((res) => {
+            console.log('loginres', res.data[0].firstname);
+
+            localStorage.setItem('username', res.data[0].firstname);
+            localStorage.setItem('roletype', res.data[0].roletype);
+            localStorage.setItem('id', res.data[0].id);
+
+            if (res !== '') {
+                data.email = '';
+                data.password = '';
+                data.roletype = '';
+                alert('logged in successfully from Student Table');
+                if (res.data[0].roletype === 'Student') {
+                    Nav(`/student/${res.data[0].id}`);
+                }
+                
+            }
+
+
+        }).catch(err=>{
+            setloginfaild(err)
+        })
+
+
     }
+
+
 
     const togglePasswordVisibility = () => {
         var passwordInput = document.getElementById("typePasswordX");
@@ -449,6 +537,7 @@ export default function Login() {
                             <i className="bi bi-eye"></i>
                         </button>
                     </div>
+                    <p style={{color:'red'}}>{loginfaild?'Wrong Credentials please check':''}</p>
                     <div className="form-group">
                         <button type="button" onClick={login}>Login</button>
                     </div>

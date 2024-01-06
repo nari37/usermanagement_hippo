@@ -11,6 +11,11 @@ import Student from "./student.js";
 export default function Menu() {
     
     const navigate = useNavigate();
+
+
+
+   
+
     const logout = () => {
         localStorage.clear();
         navigate('/login');
@@ -88,7 +93,7 @@ export default function Menu() {
                 <img id="btn1" src="menu.png" alt="#" height="40px" width="40px" style={{ margin: '50px 0 0 0', position: 'fixed' }} ></img>
                 <i class="bi bi-x-lg" id="canc" style={{ margin: '50px 0 0 0', position: 'fixed' }}></i>
             </label>
-            <div className='slidebar'>
+            <div className= 'slidebar'>
 
                 <header>
                     <img src="user.jpg" alt="#" height="80px" width="80px" style={{ borderRadius: '50%', marginBottom: '-20px', marginLeft: '20px' }}></img><br />

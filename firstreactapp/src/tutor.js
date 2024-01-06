@@ -361,15 +361,15 @@ const viewtask = async (studentid) => {
               <td>{item.course}</td>
             </tr>
 
-            <tr>
+            {/* <tr>
               <th>Start_time</th>
               <td>{item.start_time}</td>
-            </tr>
+            </tr> */}
 
-            <tr>
+            {/* <tr>
               <th>End_time </th>
               <td>{item.end_time}</td>
-            </tr>
+            </tr> */}
 
             <tr>
               <th>Action</th>
@@ -470,7 +470,7 @@ const viewtask = async (studentid) => {
                         <td colSpan='25'>{index+1}</td>
                         <td colSpan='25'>{item.firstname}</td>
                    
-                        <td colSpan='25'><center><button className="btn btn-primary" onClick={()=>viewtask(item.id)}>view</button></center></td>
+                        <td colSpan='25'><center><button className="btn btn-primary" onClick={()=>viewtask(item.id)}>View</button></center></td>
                     <Link to={`/tutorcomment/${item.id}`} style={{textAlign:'center'}} element={<Tutorcomment/>} >Review</Link>
                     </tr>)
                    })}

@@ -469,14 +469,14 @@ const handleFileChange = (e)=>{
                 <div style={{maxWidth:'500px', maxHeight:'300px',margin:'20px auto',border:'2px solid black', textAlign:'center', padding:'2rem',display:'none'}} id="toggle" >
 
                  <div><p style={{maxWidth:'100%' ,wordWrap: 'break-word'}}>{description}</p></div>
-                 <div>  <center><button onClick={downloadFile} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Download Task</button></center></div>  
+                 <div>  <center><button onClick={downloadFile} style={{marginTop:'30px',padding:'0.4rem'}}><FaDownload  style={{cursor:'pointer',}}/>Download Task</button></center></div>  
                 </div>
 
 
                 
                 <center style={{marginTop:'15px'}}> <h3>---Submit Task---</h3></center>
                 <center><input type="file" onChange={handleFileChange} /></center>
-                <center><button onClick={handileTask} style={{marginTop:'30px'}}><FaDownload  style={{cursor:'pointer'}}/>Upload Task</button></center>
+                <center><button onClick={handileTask} style={{marginTop:'30px',padding:'0.4rem'}}><FaDownload  style={{cursor:'pointer'}}/>Upload Task</button></center>
             </div>
               <center style={{marginTop:'15px'}}><h3>---Tutor Review---</h3>
               <textarea style={{border:'1px solid black'}} readOnly value={tutorreview}>

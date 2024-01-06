@@ -253,8 +253,8 @@ useEffect(() => {
                                             <input name='end' type='date' onChange={handler}/>
                                             
                                                 <label style={{ fontWeight: 'bold', margin: '30px 0 0 50px' }}>Assaiged to</label>&nbsp;
-                                                <select name='assigned_to' value={data.id} onChange={handlertutor} style={{ borderRadius: '5px', height: '30px' }}>
-                                                    <option>Please Select</option>
+                                                <select name='assigned_to'   value={data.assigned_to} onChange={handlertutor} style={{ borderRadius: '5px', height: '30px' }}>
+                                                    <option value="">Please Select</option>
                                                     {tutorname.map((val) =>
                                                         <option value={val.firstname} key={val.id} data-id={val.id}>{val.firstname}</option>
                                                     )
@@ -268,7 +268,7 @@ useEffect(() => {
                                                 <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }} >Fee Structure:</label>&nbsp;
                                                 <div>
                                                     <label style={{ margin: '15px 0 0 -35px ', fontWeight: 'bold' }}>Actual</label>
-                                                    <input type='text' id='actual' name='actual' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} value={data.Actual} />&nbsp;
+                                                    <input type='text' id='actual' name='actual' style={{ margin: '-40px 0 0 10px', borderRadius: '3px', outline: 'none' }} size={10} onChange={handler} value={data.actual} />&nbsp;
                                                 </div>
                                                 <div>
                                                     <label style={{ margin: '15px 0 0 0 ', fontWeight: 'bold' }} >Total</label>

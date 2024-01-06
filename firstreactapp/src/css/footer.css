@@ -66,6 +66,8 @@
     minmax(min(11.25rem,100%),1fr));
     grid-gap: 1rem;
 }
+
+
 .ser a{
     text-decoration: none;
     color: whitesmoke;

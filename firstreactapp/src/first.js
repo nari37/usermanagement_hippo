@@ -132,7 +132,8 @@ export default function First(props) {
         ({...prevState,[name]:value}))
     }
 
-    const contactdetails= ()=>{
+    const contactdetails= (e)=>{
+        e.preventDefault();
         // const contactinfo={name:data.name, email:data.email,subject:data.subject,phonenumber:data.phonenumber,comment:data.comment,}
         axios.post('http://localhost:5000/contactreg',data).then((res)=>
         {

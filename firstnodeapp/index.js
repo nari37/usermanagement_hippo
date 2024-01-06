@@ -238,7 +238,7 @@ app.post('/updateuserpay/:id', (req, res) => {
 
 app.post('/tutorupdateuser/:id', (req, res) => {
 
-    console.log(req.body);
+    console.log('update..',req.body);
 
     connection.query('update  `tutor` set firstname="' + req.body.firstname + '",email="' + req.body.email + '",password="' + req.body.password + '",course="' + req.body.course + '",start_time="' + req.body.start_time + '",end_time="' + req.body.end_time + '", roletype="' + req.body.roletype + '", assigned_to="' + req.body.assigned_to + '",status="' + req.body.status + '" where id="' + req.params.id + '"', (err, row, fields) => {
 
