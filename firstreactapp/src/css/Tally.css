@@ -1,0 +1,44 @@
+/* Tally.css */
+
+.tally-course-container {
+    margin-top: 100px;
+    padding: 20px;
+  }
+  
+  .tally-course-container section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .tally-course-container .content-block {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .tally-course-container .content-block {
+      width: 100%;
+    }
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+  }
+  
+  .tally-course-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .tally-course-container h2 {
+    color: #0066cc;
+  }
+  
+  .tally-course-container h3 {
+    color: #009933;
+  }
+  
+  /* Add more styles as needed */
+  

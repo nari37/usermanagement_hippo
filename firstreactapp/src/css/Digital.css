@@ -1,0 +1,61 @@
+/* .digital-marketing-course-container {
+    margin-top: 100px;
+    padding: 20px;
+  }
+  
+  .digital-marketing-course-container section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .digital-marketing-course-container .content-block {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .digital-marketing-course-container .content-block {
+      width: 100%;
+    }
+  }
+   */
+
+   .digital-marketing {
+    margin-top: 100px;
+    padding: 20px;
+  }
+  
+  .digital-marketing section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .digital-marketing .content-block {
+    width: 48%; 
+    margin-bottom: 20px;
+    
+  }
+
+  
+  .digital-marketing  h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .digital-marketing  h2 {
+    color: #0066cc;
+  }
+  
+  .digital-marketing  h3 {
+    color: #009933;
+  }
+  
+  @media (max-width: 768px) {
+    .digital-marketing .content-block {
+      width: 100%; 
+    }
+  }
+  

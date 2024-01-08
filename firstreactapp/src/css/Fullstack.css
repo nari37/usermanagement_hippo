@@ -1,0 +1,33 @@
+.fullstack-container {
+    margin-top: 100px;
+    padding: 20px;
+  }
+  
+  .fullstack-container section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .fullstack-container .content-block {
+    width: 48%; 
+    margin-bottom: 20px;
+  }
+  
+  .fullstack-container  h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .fullstack-container  h2 {
+    color: #0066cc;
+  }
+  
+  .fullstack-container  h3 {
+    color: #009933;
+  }
+  @media (max-width: 768px) {
+    .fullstack-container .content-block {
+      width: 100%; 
+    }
+  }
+  

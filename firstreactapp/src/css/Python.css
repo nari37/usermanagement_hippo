@@ -1,0 +1,44 @@
+.python-course-container {
+    margin-top: 100px;
+    padding: 20px;
+  }
+  
+  .python-course-container section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .python-course-container .content-block {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  .python-course-container section:nth-child(even) .content-block {
+    order: 1; /* Align even sections to the left */
+    float: left;
+  }
+  
+  .python-course-container section:nth-child(odd) .content-block {
+    order: 1; /* Align odd sections to the right */
+    float: right;
+  }
+  
+  .python-course-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .python-course-container h2 {
+    color: #0066cc;
+  }
+  
+  .python-course-container h3 {
+    color: #009933;
+  }
+  @media (max-width: 768px) {
+    .python-course-container .content-block {
+      width: 100%;
+      order: initial; /* Reset order on smaller screens */
+    }
+  }
+  

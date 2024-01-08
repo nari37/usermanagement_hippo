@@ -1164,12 +1164,13 @@ const save = multer({ stor,
 
 // get file from assign tutortable...
 app.get('/student_tasks/:id',(req,res)=>{
-    console.log("studnetid.",req.params.id)
+    console.log("studnetid..",req.params.id)
     const id = req.params.id;
     const sql = 'SELECT * FROM student_tutor_assignment WHERE student_id = ?';
     connection.query(sql,[id], (err,result)=>{
         if(err){
             console.log('Error exicuting sql query:',err);
+            res.status(500).send("Internal Server Error");
             return;
         }else{
             res.send(result)

@@ -190,6 +190,7 @@
  import { Link, useParams } from "react-router-dom";
 import './css/feedback.css';
 import { FaDownload } from "react-icons/fa";
+import Modal from "react-modal";
 
 
 
@@ -207,6 +208,7 @@ export default function Student() {
      const [progress, setProgress] = useState(0);
      const [file,setFile] = useState(null);
      const [tutorreview,settutorreview] = useState('');
+     const [isModalOpen, setIsModalOpen] = useState(false);  // State to control modal visibility
      
 
 
@@ -253,19 +255,28 @@ export default function Student() {
         setData((prevState) =>
             ({ ...prevState, [name]: value }))
     }
+// ...
+const Feedback = () => {
+  setIsModalOpen(true);  // Open the modal
+}
+const closeModal = () => {
+  setIsModalOpen(false);  // Close the modal
+}
 
-     const Feedback = () => {
-        let response = document.getElementById('feed');
 
-          // Set initial state to 'none'
+
+    //  const Feedback = () => {
+    //     let response = document.getElementById('feed');
+
+    //       // Set initial state to 'none'
      
-        if (response.style.display === "none") {
-            response.style.display = "block";
-        } else {
-            response.style.display = "none";
-        }
+    //     if (response.style.display === "none") {
+    //         response.style.display = "block";
+    //     } else {
+    //         response.style.display = "none";
+    //     }
 
-     }
+    //  }
   
 // ....get data 'task' from the tutor_student_assignment table...
 const mytasaks = ()=>{
@@ -483,19 +494,51 @@ const handleFileChange = (e)=>{
              
                 
                 </textarea></center>
-
-         
-
-            {/* Links Section */}
            
 
             {/* Your existing table and feedback form... */}
-            <div className="student-table">
-                {/* Your existing table code */}
-                {/* ... */}
+{/* ... */}
 
-                {/* Feedback Form */}
+          <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                style={{
+                    overlay: {
+                        backgroundColor: 'rgba(0,0,0,0.6)',
+                        zIndex: 1000,
+                        
+                    },
+                    content: {
+                        maxWidth: '30%',
+                        margin: '30px auto',
+                        borderRadius: '8px',
+                        padding: '12px',
+                        
+                       
+                       
+                    }
+                }}
+            >
+                <form className="table table-bordered">
+                    <div className="feedbackfrom">
+                        <label>Name</label><br />
+                        <input type="text" name="name" onChange={handler} value={data.firstname} style={{ borderRadius: '5px' }} readOnly /><br />
+
+                        <label>Email</label><br />
+                        <input type="text" name="email" onChange={handler} value={data.email} style={{ borderRadius: '5px' }} readOnly /><br />
+
+                        <label>Feedback</label><br />
+                        <textarea rows="3" cols="40" name="feedback" onChange={handler} style={{ borderRadius: '5px' }}></textarea><br />
+                        <center> <button onClick={feeddetails}>Submit</button></center>
+                    </div>
+                </form>
+                <button onClick={closeModal} style={{ position: 'absolute', top: '10px', right: '10px', padding:'0.5rem', fontSize:'1.6rem',color:'black',background:'white',border:'none',cursor:'pointer' }}><i class="bi bi-x-circle"></i></button>
+            </Modal>
+
+
+            {/* <div className="student-table">  
                 <div id="feed" style={{ display: 'none' }}>
+
                     <form className="table table-bordered" key={val} style={{ margin: '2rem auto' }}>
                         <div className="feedbackfrom">
                             <label>Name</label><br />
@@ -510,7 +553,7 @@ const handleFileChange = (e)=>{
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> */}
         </div>
        
     </div>

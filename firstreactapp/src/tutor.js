@@ -193,7 +193,7 @@ export default function Tutor(){
     const [selectedTime,setselectedTime] = useState('');
     const [discript,setdiscription] = useState('');
     const [studenttasks,setstudenttasks] = useState(null);
-    
+
      
     useEffect(() => {
 
@@ -312,11 +312,17 @@ const viewtask = async (studentid) => {
         const stdata = response.data[0];
         setstudenttasks(stdata.student_tasks);
 
-        // Trigger the file download by opening a new window with the file URL
-        window.open(`http://localhost:5000/download/${encodeURIComponent(stdata.student_tasks)}`, '_blank');
+        if (stdata.student_tasks.length === 0) {
+            // Show alert that no files are available to open
+            alert("No files uploaded by the student.");
+            return
+        } else{
+            window.open(`http://localhost:5000/download/${encodeURIComponent(stdata.student_tasks)}`, '_blank');
+        }
+        
     } catch (err) {
         console.log('error in view', err);
-        alert('file not found')
+        
         // Handle error as needed
     }
 };
@@ -361,16 +367,7 @@ const viewtask = async (studentid) => {
               <td>{item.course}</td>
             </tr>
 
-            {/* <tr>
-              <th>Start_time</th>
-              <td>{item.start_time}</td>
-            </tr> */}
-
-            {/* <tr>
-              <th>End_time </th>
-              <td>{item.end_time}</td>
-            </tr> */}
-
+            
             <tr>
               <th>Action</th>
               <td>
@@ -470,7 +467,10 @@ const viewtask = async (studentid) => {
                         <td colSpan='25'>{index+1}</td>
                         <td colSpan='25'>{item.firstname}</td>
                    
-                        <td colSpan='25'><center><button className="btn btn-primary" onClick={()=>viewtask(item.id)}>View</button></center></td>
+                        <td colSpan='25'>
+                            <center><button className="btn btn-primary" onClick={()=>viewtask(item.id)}>View</button>
+                           
+                        </center></td>
                     <Link to={`/tutorcomment/${item.id}`} style={{textAlign:'center'}} element={<Tutorcomment/>} >Review</Link>
                     </tr>)
                    })}

@@ -1,7 +1,10 @@
 
 
 
-
+*{
+  scroll-behavior: smooth;
+  scroll-padding-top: 3rem;
+}
 .App {
   text-align: center;
 }
@@ -65,13 +68,15 @@
   padding: 2rem;
 }
 
-.homepage .heading{
+.homepage .heading {
   flex: 1 1 20rem;
   align-self: center;
-
   padding: 2rem;
   color: rgba(0, 191, 255, 0.785);
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.homepage .heading h2{
+  color: rgba(0, 191, 255, 0.785);
 }
 .homepage .heading span{
   color: chocolate;
@@ -88,7 +93,9 @@
   .homepage .heading{
     text-align: center;
     margin-bottom: -60px;
+     
   }
+  
   .homepage .imagehippo img {
     max-width: 90%;
     margin: 0 auto; /* This centers the element horizontally */
@@ -112,6 +119,9 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: 900;
 }
+ .qutation {
+  color: #009933;
+}
 .whychoose center span{
   color: chocolate;
  font-family: 'Times New Roman', Times, serif;
@@ -128,11 +138,14 @@
 .whyflex.wyimg{
   flex: 1 ;
   padding-right: 20px;
+  
 }
 .wyimg img {
   max-width: 500px; /* Make sure the image doesn't exceed its container */
   height: auto;
-  
+  border: 'none';
+  border-radius: 30px;
+ 
 }
 span#hip{
   color: rgba(0, 191, 255, 0.785); 
@@ -196,6 +209,9 @@ span#hip{
   margin-top: 20px;
   padding: 2rem;
 }
+.cards h3{
+  color: #009933;
+}
 
 .card {
   width: calc(33.33% - 20px); /* 33.33% width for each card with some spacing */
@@ -211,9 +227,11 @@ span#hip{
 }
 @media (max-width: 700px) {
   .card {
-    width: calc(50% - 20px); /* 50% width for each card on screens 700px or below */
+    width: calc(90% - 20px); /* 50% width for each card on screens 700px or below */
   }
 }
+
+
 .card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transform: translateY(-7px); /* Lift the card up by 5px on hover */

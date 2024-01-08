@@ -21,10 +21,15 @@ import TutorUpdate from './tutorupdate';
 import StudentData from './stu';
 import Courses from './courseupdate';
 import Footer from './footer';
-import Studentprofile from './profiles/Studentprofile';
-import Admin from './profiles/Admin';
-import TutorProfile from './profiles/TutorProfile';
+// import Studentprofile from './profiles/Studentprofile';
+// import Admin from './profiles/Admin';
+// import TutorProfile from './profiles/TutorProfile';
 import Tutorcomment from './Tutorcomment';
+import Fullstack from './Fullstack.jsx';
+import Digital from './Digital.jsx';
+import Tally from './Tally.jsx';
+import Python from './Python.jsx';
+
 
 
 
@@ -59,6 +64,12 @@ root.render(
     <Route path='/tutorcomment/:id' element={<Tutorcomment/>}></Route>
 
     <Route path='/footer' element={<Footer/>}></Route>
+    <Route path='/fullstack' element={<Fullstack/>}></Route>
+    <Route path='/digitalmarketing' element={<Digital/>}></Route>
+    <Route path='/tally' element={<Tally/>}></Route>
+    <Route path='/python' element={<Python/>}></Route>
+
+
    {/* profiles */}
     
 

@@ -74,7 +74,7 @@ return (
     </div>
 {/*  */}
     <div    className='homepage ' >
-       <div data-aos="fade-up" className='heading'><h2  >HippoCloud <br></br> <span ><q>Best place to learn</q></span></h2></div>
+       <div data-aos="fade-up" className='heading'><h2>HippoCloud <br></br> <span ><q>Best place to learn</q></span></h2></div>
        <div className='imagehippo'> <img data-aos="fade-up" src='hippo_img.png' alt='' style={{borderRadius:"20px 0 20px 0"}}/></div> 
     </div>
 {/*  */}
@@ -85,7 +85,7 @@ return (
        </center>
        <div className='whyflex'>
        <div className='wyimg'><img data-aos="fade-up" alt="#" src='why_choose.avif'/></div>
-        <div className='pera' data-aos="fade-up"><center><span data-aos="fade-up">Why choose <span id='hip' data-aos="fade-up">HippoCloud?</span></span></center><p data-aos="fade-up">HippoCloud is the first software develepment IT company at <b>Vishakhapatnam</b> location. Over develepment team deals multy a   </p></div> 
+        <div className='pera' data-aos="fade-up"><center><span data-aos="fade-up">Why choose <span id='hip' data-aos="fade-up">HippoCloud?</span></span></center><p data-aos="fade-up">HippoCloud Technologies, located in <b>Vishakhapatnam</b>, stands as the premier software development IT company in the region. With a dedicated team, we specialize in providing top-notch training to thousands of students, offering internships, and excelling in the development of cutting-edge software solutions. Our expertise extends to digital marketing, Photoshop, video editing, and tally consulting. At HippoCloud, we are committed to nurturing talent, delivering quality education, and creating impactful software solutions for a brighter future. </p></div> 
        </div>
     </div>
     </section>

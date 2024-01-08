@@ -260,7 +260,7 @@ export default function First(props) {
 
 
 <div  className='myin'>
-<h3 style={{margin:'40px 0 0 0px',fontSize:'40px'}}>Contact With Us</h3>
+<h3 style={{margin:'40px 0 0 0px',fontSize:'40px',color:'#009933'}}>Contact With Us</h3>
 <div style={{display:"flex"}}>
 <input type="text" placeholder="Name*" id="name" name="name" required onChange={handler}/>&emsp;
 <input type="email" placeholder="Email*" id="email"  name="email" required onChange={handler}/><br/><br/>

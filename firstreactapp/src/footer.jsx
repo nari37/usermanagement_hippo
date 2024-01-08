@@ -98,10 +98,10 @@ export default function Footer() {
 
 <div className='ser' data-aos="fade-up">
 <h1>Services :</h1>
-<Link to="coursedetails"  >Full Stack </Link><br/>
-<Link to="coursedetails" >Python</Link><br/> 
-<Link to="coursedetails" >DigitalMarketing</Link><br/>
-<Link to="coursedetails" >Tally</Link>
+<Link to="/fullstack"  >Full Stack</Link><br/>
+<Link to="/python" >Python Programming</Link><br/> 
+<Link to="/digitalmarketing" >DigitalMarketing</Link><br/>
+<Link to="/tally" >Tally</Link>
 </div>
 
 <div data-aos="fade-up">
@@ -119,9 +119,9 @@ export default function Footer() {
 <div  className='hac' >
   
 <ul >
-<Link to='./' style={{textDecoration:'none',color:'whitesmoke'}}><li>Home</li></Link>
-<Link to='/third' style={{textDecoration:'none',color:'whitesmoke'}}><li>About Us</li></Link>
-<Link to='/first' style={{textDecoration:'none',color:'whitesmoke'}}><li>Contact Us</li></Link>
+<Link to='./' style={{textDecoration:'none',color:'whitesmoke', cursor:'pointer'}}><li>Home</li></Link>
+<Link to='/third' style={{textDecoration:'none',color:'whitesmoke',cursor:'pointer'}}><li>About Us</li></Link>
+<Link to='/first' style={{textDecoration:'none',color:'whitesmoke',cursor:'pointer'}}><li>Contact Us</li></Link>
 </ul>
 </div>
 
