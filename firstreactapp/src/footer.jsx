@@ -85,7 +85,7 @@ export default function Footer() {
 
 <div style={{color:"white"}} className='gri'>
 
-<div data-aos="fade-up" className='fin'>
+<div  className='fin'>
 <h1>Find us :</h1>
 <img src="logo-removebg-preview.png" alt="#"  style={{maxWidth:'300px',marginLeft:"-35px"}}/>
 <br></br>
@@ -96,7 +96,7 @@ export default function Footer() {
 <i class="bi bi-telephone-fill" style={{color:'white',fontSize:'20px',marginLeft:'8px'}}></i> &emsp;<span>+91 7601046792</span>
 </div>
 
-<div className='ser' data-aos="fade-up">
+<div className='ser' >
 <h1>Services :</h1>
 <Link to="/fullstack"  >Full Stack</Link><br/>
 <Link to="/python" >Python Programming</Link><br/> 
@@ -104,7 +104,7 @@ export default function Footer() {
 <Link to="/tally" >Tally</Link>
 </div>
 
-<div data-aos="fade-up">
+<div >
 <h1>Follow Us On :</h1>
 
 <div style={{display:'flex',gap:'1rem',marginTop:'10px'}} className='socail'>

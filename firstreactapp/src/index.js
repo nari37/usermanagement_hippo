@@ -60,14 +60,14 @@ root.render(
     <Route path='/student/:id' element={<Student/>}></Route>
     <Route path='/payment/:id' element={<Payment/>}></Route>
     <Route path='/finance' element={<Finance/>}></Route>
-    
     <Route path='/tutorcomment/:id' element={<Tutorcomment/>}></Route>
-
     <Route path='/footer' element={<Footer/>}></Route>
     <Route path='/fullstack' element={<Fullstack/>}></Route>
     <Route path='/digitalmarketing' element={<Digital/>}></Route>
     <Route path='/tally' element={<Tally/>}></Route>
     <Route path='/python' element={<Python/>}></Route>
+    <Route path='/python' element={<Python/>}></Route>
+
 
 
    {/* profiles */}
