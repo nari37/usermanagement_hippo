@@ -179,9 +179,7 @@ useEffect(() => {
 
     return (
         <section>
-            <div  >
-
-
+            <div>
                 <div  style={{ margin:'-25px 0 0 0',background:'rgba(143,211,244,0.5)',height:'120vh' }}>
                     <div className="container h-100" style={{ padding: '6%' }}>
                         <div className="row d-flex justify-content-center align-items-center h-100">

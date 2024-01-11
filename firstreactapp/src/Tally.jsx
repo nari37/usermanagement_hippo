@@ -5,7 +5,7 @@ export default function Tally() {
   return (
     <div className="tally-course-container">
     <center>
-      <h1>Tally Course Content</h1>
+      <h1 style={{color:'#0a5275'}}>Tally Course Content</h1>
     </center>
 
     <section>

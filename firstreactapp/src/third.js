@@ -32,12 +32,12 @@ export default function Third() {
     return (
         <>
             <section style={{ padding: '2rem',background:'url(about.png)',objectFit:'cover', marginTop:'60px' }}>
-                <h3 style={{ fontWeight: 'bold', color: 'orange',textDecoration:'underline' }}>About HippoCloud Technologies</h3>
-                <h3 align="center" style={{ fontWeight: 'bold', color: 'blue' }}>Welcome To <span id="W_Name1">HippoCloud Technologies</span></h3>
+                <h3 style={{ fontWeight: 'bold', color: 'maroon',textDecoration:'underline' }}>About HippoCloud Technologies</h3>
+                <h3 align="center" style={{ fontWeight: 'bold', color: '#0a5275' }}>Welcome To <span id="W_Name1">HippoCloud Technologies</span></h3>
 
-                <p style={{ fontWeight: 'bold' }}><span id="W_Name2">HippoCloud Technologies</span> is a leading institute committed to providing top-notch training to thousands of students. We specialize in offering a diverse range of courses with a strong focus on quality education and hands-on tutorials. Our passion for education drives us to transform it into a thriving online platform, ensuring our users receive the best learning experience.</p>
+                <p style={{ fontWeight: 'bold',color:'#009933' }}><span id="W_Name2">HippoCloud Technologies</span> is a leading institute committed to providing top-notch training to thousands of students. We specialize in offering a diverse range of courses with a strong focus on quality education and hands-on tutorials. Our passion for education drives us to transform it into a thriving online platform, ensuring our users receive the best learning experience.</p>
                 
-                <p style={{ fontWeight: 'bold' }}>At HippoCloud Technologies, we take pride in being the best institute for training and providing valuable internships to our students. Our expertise extends to software development, and we have a team of dedicated Tally consultants. We offer comprehensive courses in digital marketing, photo editing, and video editing to empower individuals with valuable skills in the ever-evolving tech landscape.</p>
+                <p style={{ fontWeight: 'bold',color:'#009933' }}>At HippoCloud Technologies, we take pride in being the best institute for training and providing valuable internships to our students. Our expertise extends to software development, and we have a team of dedicated Tally consultants. We offer comprehensive courses in digital marketing, photo editing, and video editing to empower individuals with valuable skills in the ever-evolving tech landscape.</p>
                 
                 <h4 align="center" style={{ fontWeight: 'bold', color: 'maroon' }}>Empowering Minds, Transforming Futures</h4><br></br>
                 

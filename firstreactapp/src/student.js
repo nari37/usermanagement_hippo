@@ -209,7 +209,12 @@ export default function Student() {
      const [file,setFile] = useState(null);
      const [tutorreview,settutorreview] = useState('');
      const [isModalOpen, setIsModalOpen] = useState(false);  // State to control modal visibility
-     
+    //  ....
+    const [course,setCourse] = useState('')
+    const [content,setcontent] = useState('')
+    const [Date,setDate] = useState('')
+
+
 
 
 
@@ -300,6 +305,9 @@ useEffect(() => {
             setTaskfiles(disc.Test);
             setTimeshedule(disc.Time);
             settutorreview(disc.tutor_review);
+            setCourse(disc.course);
+            setcontent(disc.content);
+            setDate(disc.Date);
         })
         .catch(err => console.log(err));
 }, [id]);
@@ -345,12 +353,12 @@ const handleFileChange = (e)=>{
 
   return (
     <div className="student-table" style={{marginTop:'50px'}}>
-         <button className="btn btn-outline-dark  btn-lg px-2" type="submit" onClick={Feedback}style={{float:'right'}}>Feed Back</button>
+         <button className="btn btn-outline-dark  btn-lg px-2" type="submit" onClick={Feedback}style={{float:'right',marginTop:'30px'}}>Feed Back</button>
          <table className="horizontal-table">
       <tbody>
         {studentinfo.map((item, index) => (
-          <>
-            <tr>
+          < >
+            <tr >
               <th>ID</th>
               <td>{item.id}</td>
             </tr>
@@ -471,25 +479,38 @@ const handleFileChange = (e)=>{
             </div>
        {/* Display schedule or "no schedules yet..." */}
            <center style={{marginTop:'15px'}}>
-           <h3>---My Schedule---</h3>
-           {Timeshedule ? <p>{Timeshedule}</p> : <p>No schedules yet...</p>}
-            </center>
+           <h3 style={{color:'#0a5275'}}>---My Schedule---</h3>
+           </center>
+           <div style={{display:'flex',justifyContent:'space-around'}} >
+            <div >
+            {Timeshedule ? <p style={{fontWeight:'bold'}}><b style={{color:'#009933'}}>Time :</b> {Timeshedule}</p> : <p>No schedules yet...</p>}
+            {Date ? <p style={{fontWeight:'bold'}}><b style={{color:'#009933'}}>Date :</b> {Date}</p> : <p>No schedules yet...</p>}
+            </div>
+            <div>
+            {course ? <p style={{fontWeight:'bold'}}><b style={{color:'#009933'}}>Course :</b> {course}</p> : <p>No schedules yet...</p>}
+            {content ? <p style={{fontWeight:'bold'}}><b style={{color:'#009933'}}>Concept:</b> {content}</p> : <p>No schedules yet...</p>}
+   
+            </div>
+
+           </div>
+           
+            
             {/* Tasks Section */}
             <div className="tasks-container">
                 <center><button className="btn btn-primary"  onClick={mytasaks}> My Task</button></center>
                 <div style={{maxWidth:'500px', maxHeight:'300px',margin:'20px auto',border:'2px solid black', textAlign:'center', padding:'2rem',display:'none'}} id="toggle" >
 
-                 <div><p style={{maxWidth:'100%' ,wordWrap: 'break-word'}}>{description}</p></div>
+                 <div><p style={{maxWidth:'100%' ,wordWrap: 'break-word',}}><span style={{color:'#009933',fontWeight:'bold'}}>Task Description :</span> <b>{description}</b></p></div>
                  <div>  <center><button onClick={downloadFile} style={{marginTop:'30px',padding:'0.4rem'}}><FaDownload  style={{cursor:'pointer',}}/>Download Task</button></center></div>  
                 </div>
 
 
                 
-                <center style={{marginTop:'15px'}}> <h3>---Submit Task---</h3></center>
+                <center style={{marginTop:'15px',color:'#0a5275'}}> <h3>---Submit Task---</h3></center>
                 <center><input type="file" onChange={handleFileChange} /></center>
                 <center><button onClick={handileTask} style={{marginTop:'30px',padding:'0.4rem'}}><FaDownload  style={{cursor:'pointer'}}/>Upload Task</button></center>
             </div>
-              <center style={{marginTop:'15px'}}><h3>---Tutor Review---</h3>
+              <center style={{marginTop:'15px',color:'#0a5275'}}><h3>---Tutor Review---</h3>
               <textarea style={{border:'1px solid black'}} readOnly value={tutorreview}>
              
                 

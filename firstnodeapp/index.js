@@ -5,8 +5,8 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
-const path = require('path'); // Add this line
 
+const path = require('path'); // Add this line
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json())
@@ -411,21 +411,10 @@ app.get('/tutor/:id/:course', (req, res) => {
         }
     })
 
-    // connection.query('select * from  `tutor` where id = "' + req.params.id + '" ', (err, rows, fields) => {
-
-    //     if (!err) {
-    //         res.send(rows)
-    //     }
-    //     else {
-    //         res.send(err)
-    //     }
-
-
-    // })
-
+   
 })
 
-app.post('/fullstack', (req, res) => {
+app.get('/fullstack', (req, res) => {
 
     connection.query('select * from  `courses`  ', (err, rows, fields) => {
 
@@ -441,7 +430,7 @@ app.post('/fullstack', (req, res) => {
 
 })
 
-app.post('/testing', (req, res) => {
+app.get('/testing', (req, res) => {
 
     connection.query('select * from  `testing`  ', (err, rows, fields) => {
 
@@ -456,7 +445,7 @@ app.post('/testing', (req, res) => {
     })
 
 })
-app.post('/devops', (req, res) => {
+app.get('/devops', (req, res) => {
 
     connection.query('select * from  `devops`  ', (err, rows, fields) => {
 
@@ -473,7 +462,7 @@ app.post('/devops', (req, res) => {
 })
 
 
-app.post('/tally', (req, res) => {
+app.get('/tally', (req, res) => {
 
     connection.query('select * from  `tally`  ', (err, rows, fields) => {
 
@@ -488,7 +477,7 @@ app.post('/tally', (req, res) => {
     })
 
 })
-app.post('/marketing', (req, res) => {
+app.get('/marketing', (req, res) => {
 
     connection.query('select * from  `digital_marketing`  ', (err, rows, fields) => {
 
@@ -1223,7 +1212,70 @@ app.post('/check-email/:data.email', (req, res) => {
   });
 
 
+//   get time...
 
+app.get('/time/:id',(req,res)=>{
+    const id = req.params.id;
+   
+    console.log('which id',id)
+   
+    const sql = 'SELECT * FROM student_tutor_assignment WHERE tutor_id = ?';
+    connection.query(sql,[id], (err,result)=>{
+        if(err){
+            console.log('Error exicuting sql query:',err);
+            return;
+        }else{
+            res.send(result)
+        }
+    })
+    
+})
+// post content and course date,status...
+app.post('/content/:id', (req, res) => {
+    const { contents, courses, date, Status,time} = req.body;
+   
+
+   
+    const tutorId = req.params.id; // Use req.params.id directly, no need to destructure
+    console.log('contents', contents);
+    console.log('courses', courses);
+    console.log('date..', date);
+    console.log('status...',Status);
+    console.log('time...',time);
+
+
+    
+    const sql = 'UPDATE student_tutor_assignment SET content = ?, course = ?, Date = ?, status = ? WHERE tutor_id = ?';
+    
+    // Use connection.query to execute the SQL query...
+    connection.query(sql, [contents, courses,date,Status, tutorId], (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log('Update successful');
+            res.status(200).send('Update successful');
+        }
+    });
+});
+
+// get all date,content,time,status from student assign table...
+
+app.get('/getall/:id', (req, res) => {
+
+    connection.query('select * from  `student_tutor_assignment` where tutor_id = "'+req.params.id+'" ', (err, rows, fields) => {
+
+        if (!err) {
+            res.send(rows)
+        }
+        else {
+            res.send(err)
+        }
+
+
+    })
+
+})
 
 
 // app.post('/assignTutor/:studentId/:tutorId', (req, res) => {

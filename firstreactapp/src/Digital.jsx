@@ -5,7 +5,7 @@ export default function Digital() {
   return (
     <div className="digital-marketing">
       <center>
-        <h1>Digital Marketing Course Content</h1>
+        <h1 style={{color:'#0a5275'}}>Digital Marketing Course Content</h1>
       </center>
 
       <section>

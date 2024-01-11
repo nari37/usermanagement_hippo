@@ -5,7 +5,7 @@ export default function Fullstack() {
   return (
     <div className="fullstack-container">
       <center>
-        <h1>MERN Stack Course Content</h1>
+        <h1 style={{color:'#0a5275'}}>MERN Stack Course Content</h1>
       </center>
 
       <section>

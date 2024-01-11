@@ -5,7 +5,7 @@ export default function Python() {
   return (
     <div className="python-course-container">
        <center>
-        <h1>Python Course Content</h1>
+        <h1 style={{color:'#0a5275'}}>Python Course Content</h1>
       </center>
 
       <section>
